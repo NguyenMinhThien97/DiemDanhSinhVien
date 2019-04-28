@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 07, 2019 lúc 07:32 PM
+-- Thời gian đã tạo: Th4 28, 2019 lúc 07:19 AM
 -- Phiên bản máy phục vụ: 10.1.37-MariaDB
 -- Phiên bản PHP: 5.6.40
 
@@ -29,21 +29,21 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cahoc` (
-  `ma_ca_hoc` bigint(20) NOT NULL,
-  `buoi_hoc` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `gio_bat_dau` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `gio_ket_thuc` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `ma_mon_hoc` bigint(20) DEFAULT NULL,
-  `ma_phong_hoc` bigint(20) DEFAULT NULL,
-  `thu` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
+  `macahoc` bigint(20) NOT NULL,
+  `maphonghoc` bigint(20) DEFAULT NULL,
+  `buoihoc` varchar(255) COLLATE utf8mb4_german2_ci DEFAULT NULL,
+  `giobatdau` varchar(255) COLLATE utf8mb4_german2_ci DEFAULT NULL,
+  `gioketthuc` varchar(255) COLLATE utf8mb4_german2_ci DEFAULT NULL,
+  `mamonhoc` bigint(20) DEFAULT NULL,
+  `thu` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `cahoc`
 --
 
-INSERT INTO `cahoc` (`ma_ca_hoc`, `buoi_hoc`, `gio_bat_dau`, `gio_ket_thuc`, `ma_mon_hoc`, `ma_phong_hoc`, `thu`) VALUES
-(1, 'Sáng', '7h00', '9h30', 4203000959, 1, '2');
+INSERT INTO `cahoc` (`macahoc`, `maphonghoc`, `buoihoc`, `giobatdau`, `gioketthuc`, `mamonhoc`, `thu`) VALUES
+(1, 1, 'Sáng', '10:00', '12:30', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -52,15 +52,20 @@ INSERT INTO `cahoc` (`ma_ca_hoc`, `buoi_hoc`, `gio_bat_dau`, `gio_ket_thuc`, `ma
 --
 
 CREATE TABLE `chitietdiemdanh` (
-  `ma_diem_danh` bigint(20) NOT NULL,
-  `buoi_hoc` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `gio_bat_dau` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `gio_ket_thuc` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `ly_do_nghi` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `ten_giao_vien` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `ten_mon_hoc` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `thu` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
+  `machitietdiemdanh` bigint(20) NOT NULL,
+  `madiemdanh` int(11) NOT NULL,
+  `lydonghi` varchar(255) COLLATE utf8mb4_german2_ci DEFAULT NULL,
+  `status` bit(1) NOT NULL,
+  `ngaydiemdanh` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `chitietdiemdanh`
+--
+
+INSERT INTO `chitietdiemdanh` (`machitietdiemdanh`, `madiemdanh`, `lydonghi`, `status`, `ngaydiemdanh`) VALUES
+(1, 1, NULL, b'1', '2019-04-18 00:00:00'),
+(2, 1, NULL, b'1', '2019-04-28 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -69,78 +74,20 @@ CREATE TABLE `chitietdiemdanh` (
 --
 
 CREATE TABLE `diemdanh` (
-  `ma_diem_danh` bigint(20) NOT NULL,
-  `ma_sinh_vien` bigint(20) DEFAULT NULL,
-  `ngay_diem_danh` datetime DEFAULT NULL,
-  `so_tiet_di_hoc` int(11) DEFAULT NULL,
-  `so_tiet_vang` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `giaovien`
---
-
-CREATE TABLE `giaovien` (
-  `ma_giao_vien` bigint(20) NOT NULL,
-  `chuc_vu` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `gioi_tinh` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `hinh_giao_vien` tinyblob,
-  `mat_khau` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `ngay_sinh` date DEFAULT NULL,
-  `ten_giao_vien` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `ten_khoa` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `trinh_do` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
-
--- --------------------------------------------------------
+  `madiemdanh` bigint(20) NOT NULL,
+  `magiaovien` bigint(20) DEFAULT NULL,
+  `masinhvien` int(11) NOT NULL,
+  `mamonhoc` int(11) NOT NULL,
+  `sotietdihoc` int(11) DEFAULT NULL,
+  `sotietvang` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
 
 --
--- Cấu trúc bảng cho bảng `hibernate_sequence`
+-- Đang đổ dữ liệu cho bảng `diemdanh`
 --
 
-CREATE TABLE `hibernate_sequence` (
-  `next_val` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
-
---
--- Đang đổ dữ liệu cho bảng `hibernate_sequence`
---
-
-INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(1),
-(1),
-(1),
-(1),
-(1),
-(1);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `lich_day`
---
-
-CREATE TABLE `lich_day` (
-  `ma_mon_hoc` bigint(20) NOT NULL,
-  `buoi_hoc` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `chi_so` int(11) NOT NULL,
-  `gio_bat_dau` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `gio_ket_thuc` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `hoc_ky` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `ma_nguoi_dung` bigint(20) NOT NULL,
-  `nam_hoc` int(11) NOT NULL,
-  `ngay_bat_dau` date DEFAULT NULL,
-  `ngay_ket_thuc` date DEFAULT NULL,
-  `so_cho_ngoi` int(11) NOT NULL,
-  `so_tiet_ly_thuyet` int(11) NOT NULL,
-  `so_tiet_thuc_hanh` int(11) NOT NULL,
-  `ten_mon_hoc` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `ten_phong_hoc` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `thu` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `tong_so_tiet` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
+INSERT INTO `diemdanh` (`madiemdanh`, `magiaovien`, `masinhvien`, `mamonhoc`, `sotietdihoc`, `sotietvang`) VALUES
+(1, 10052121, 15094631, 1, 20, 0);
 
 -- --------------------------------------------------------
 
@@ -149,25 +96,25 @@ CREATE TABLE `lich_day` (
 --
 
 CREATE TABLE `monhoc` (
-  `ma_mon_hoc` bigint(20) NOT NULL,
-  `chi_so` int(11) DEFAULT NULL,
-  `hoc_ky` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `ma_giao_vien` bigint(20) DEFAULT NULL,
-  `nam_hoc` int(11) DEFAULT NULL,
-  `ngay_bat_dau` date DEFAULT NULL,
-  `ngay_ket_thuc` date DEFAULT NULL,
-  `so_tiet_ly_thuyet` int(11) DEFAULT NULL,
-  `so_tiet_thuc_hanh` int(11) DEFAULT NULL,
-  `ten_mon_hoc` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `tong_so_tiet` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
+  `mamonhoc` bigint(20) NOT NULL,
+  `chiso` int(11) DEFAULT NULL,
+  `hocky` varchar(255) COLLATE utf8mb4_german2_ci DEFAULT NULL,
+  `magiaovien` bigint(20) DEFAULT NULL,
+  `namhoc` varchar(255) COLLATE utf8mb4_german2_ci DEFAULT NULL,
+  `ngaybatdau` date DEFAULT NULL,
+  `ngayketthuc` date DEFAULT NULL,
+  `sotietlythuyet` int(11) DEFAULT NULL,
+  `sotietthuchanh` int(11) DEFAULT NULL,
+  `tenmonhoc` varchar(255) COLLATE utf8mb4_german2_ci DEFAULT NULL,
+  `tongsotiet` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `monhoc`
 --
 
-INSERT INTO `monhoc` (`ma_mon_hoc`, `chi_so`, `hoc_ky`, `ma_giao_vien`, `nam_hoc`, `ngay_bat_dau`, `ngay_ket_thuc`, `so_tiet_ly_thuyet`, `so_tiet_thuc_hanh`, `ten_mon_hoc`, `tong_so_tiet`) VALUES
-(4203000959, 3, '1', 10039791, 2018, '2019-08-01', '2019-11-04', 30, 30, 'Triển khai an ninh hệ thống', 60);
+INSERT INTO `monhoc` (`mamonhoc`, `chiso`, `hocky`, `magiaovien`, `namhoc`, `ngaybatdau`, `ngayketthuc`, `sotietlythuyet`, `sotietthuchanh`, `tenmonhoc`, `tongsotiet`) VALUES
+(1, 3, '1', 10052121, '2019', '2019-04-01', '2019-04-30', 30, 30, 'OOP', 60);
 
 -- --------------------------------------------------------
 
@@ -177,17 +124,27 @@ INSERT INTO `monhoc` (`ma_mon_hoc`, `chi_so`, `hoc_ky`, `ma_giao_vien`, `nam_hoc
 
 CREATE TABLE `nguoidung` (
   `ma` bigint(20) NOT NULL,
-  `chuc_vu` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `gioi_tinh` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `mat_khau` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `ngay_sinh` date DEFAULT NULL,
-  `ten` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `ten_khoa` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `ten_lop` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `trinh_do` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
+  `chucvu` varchar(255) COLLATE utf8mb4_german2_ci DEFAULT NULL,
+  `gioitinh` varchar(255) COLLATE utf8mb4_german2_ci DEFAULT NULL,
   `hinh` tinyblob,
-  `status` bit(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
+  `matkhau` varchar(255) COLLATE utf8mb4_german2_ci DEFAULT NULL,
+  `ngaysinh` datetime DEFAULT NULL,
+  `sodienthoai` varchar(10) COLLATE utf8mb4_german2_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_german2_ci NOT NULL,
+  `status` int(11) DEFAULT NULL,
+  `ten` varchar(255) COLLATE utf8mb4_german2_ci DEFAULT NULL,
+  `tenkhoa` varchar(255) COLLATE utf8mb4_german2_ci DEFAULT NULL,
+  `tenlop` varchar(255) COLLATE utf8mb4_german2_ci DEFAULT NULL,
+  `trinhdo` varchar(255) COLLATE utf8mb4_german2_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `nguoidung`
+--
+
+INSERT INTO `nguoidung` (`ma`, `chucvu`, `gioitinh`, `hinh`, `matkhau`, `ngaysinh`, `sodienthoai`, `email`, `status`, `ten`, `tenkhoa`, `tenlop`, `trinhdo`) VALUES
+(10052121, 'Giảng Viên', 'Nữ', NULL, 'abc', '1985-01-10 00:00:00', '', '', 1, 'Nguyễn Hoàng Oanh', 'CNTT', '', 'Tiến sỉ'),
+(15094631, 'Sinh viên', 'Nam', NULL, 'zzz', '1997-01-05 00:00:00', '', '', 0, 'Nguyễn Minh Thiên', 'CNTT', 'DHCNTT11A', 'Đại học');
 
 -- --------------------------------------------------------
 
@@ -196,40 +153,17 @@ CREATE TABLE `nguoidung` (
 --
 
 CREATE TABLE `phonghoc` (
-  `ma_phong_hoc` bigint(20) NOT NULL,
-  `so_cho_ngoi` int(11) DEFAULT NULL,
-  `ten_phong_hoc` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
+  `maphonghoc` bigint(20) NOT NULL,
+  `sochongoi` int(11) DEFAULT NULL,
+  `tenphonghoc` varchar(255) COLLATE utf8mb4_german2_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `phonghoc`
 --
 
-INSERT INTO `phonghoc` (`ma_phong_hoc`, `so_cho_ngoi`, `ten_phong_hoc`) VALUES
-(1, 70, 'A1-01');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `sinhvien`
---
-
-CREATE TABLE `sinhvien` (
-  `ma_sinh_vien` bigint(20) NOT NULL,
-  `gioi_tinh` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `hinh_sinh_vien` tinyblob,
-  `mat_khau` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `ngay_sinh` date DEFAULT NULL,
-  `ten_lop` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL,
-  `ten_sinh_vien` varchar(255) COLLATE utf8_german2_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
-
---
--- Đang đổ dữ liệu cho bảng `sinhvien`
---
-
-INSERT INTO `sinhvien` (`ma_sinh_vien`, `gioi_tinh`, `hinh_sinh_vien`, `mat_khau`, `ngay_sinh`, `ten_lop`, `ten_sinh_vien`) VALUES
-(15094631, 'Nam', NULL, '12345', '1997-01-05', 'DHCNTT11A', 'Nguyễn Minh Thiên');
+INSERT INTO `phonghoc` (`maphonghoc`, `sochongoi`, `tenphonghoc`) VALUES
+(1, 50, 'A1-01');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -239,37 +173,25 @@ INSERT INTO `sinhvien` (`ma_sinh_vien`, `gioi_tinh`, `hinh_sinh_vien`, `mat_khau
 -- Chỉ mục cho bảng `cahoc`
 --
 ALTER TABLE `cahoc`
-  ADD PRIMARY KEY (`ma_ca_hoc`);
+  ADD PRIMARY KEY (`macahoc`);
 
 --
 -- Chỉ mục cho bảng `chitietdiemdanh`
 --
 ALTER TABLE `chitietdiemdanh`
-  ADD PRIMARY KEY (`ma_diem_danh`);
+  ADD PRIMARY KEY (`machitietdiemdanh`);
 
 --
 -- Chỉ mục cho bảng `diemdanh`
 --
 ALTER TABLE `diemdanh`
-  ADD PRIMARY KEY (`ma_diem_danh`);
-
---
--- Chỉ mục cho bảng `giaovien`
---
-ALTER TABLE `giaovien`
-  ADD PRIMARY KEY (`ma_giao_vien`);
-
---
--- Chỉ mục cho bảng `lich_day`
---
-ALTER TABLE `lich_day`
-  ADD PRIMARY KEY (`ma_mon_hoc`);
+  ADD PRIMARY KEY (`madiemdanh`);
 
 --
 -- Chỉ mục cho bảng `monhoc`
 --
 ALTER TABLE `monhoc`
-  ADD PRIMARY KEY (`ma_mon_hoc`);
+  ADD PRIMARY KEY (`mamonhoc`);
 
 --
 -- Chỉ mục cho bảng `nguoidung`
@@ -281,13 +203,17 @@ ALTER TABLE `nguoidung`
 -- Chỉ mục cho bảng `phonghoc`
 --
 ALTER TABLE `phonghoc`
-  ADD PRIMARY KEY (`ma_phong_hoc`);
+  ADD PRIMARY KEY (`maphonghoc`);
 
 --
--- Chỉ mục cho bảng `sinhvien`
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
-ALTER TABLE `sinhvien`
-  ADD PRIMARY KEY (`ma_sinh_vien`);
+
+--
+-- AUTO_INCREMENT cho bảng `chitietdiemdanh`
+--
+ALTER TABLE `chitietdiemdanh`
+  MODIFY `machitietdiemdanh` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
