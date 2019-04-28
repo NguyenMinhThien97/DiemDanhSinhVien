@@ -13,3 +13,13 @@
 0:0:0:0:0:0:0:1 - - [28/Apr/2019:11:43:33 +0700] "GET /giaovien/quetQRDiemDanh/15094631/10052121/abc HTTP/1.1" 200 14 http-bio-8899-exec-10 258
 0:0:0:0:0:0:0:1 - - [28/Apr/2019:12:13:27 +0700] "GET /nguoidung/getAll HTTP/1.1" 200 519 http-bio-8899-exec-2 713
 0:0:0:0:0:0:0:1 - - [28/Apr/2019:12:15:47 +0700] "GET /nguoidung/getAll HTTP/1.1" 200 519 http-bio-8899-exec-2 476
+192.168.1.100 - - [28/Apr/2019:19:11:02 +0700] "GET /nguoidung/dangNhap/10052121/abc HTTP/1.1" 200 260 http-bio-8899-exec-1 530
+192.168.1.100 - - [28/Apr/2019:19:11:19 +0700] "GET /nguoidung/dangNhap/10052121/zzz HTTP/1.1" 200 - http-bio-8899-exec-3 12
+192.168.1.100 - - [28/Apr/2019:19:11:27 +0700] "GET /nguoidung/dangNhap/10052121/abc HTTP/1.1" 200 260 http-bio-8899-exec-5 12
+192.168.1.100 - - [28/Apr/2019:20:32:19 +0700] "GET /nguoidung/dangNhap/15094631/zzz HTTP/1.1" 200 266 http-bio-8899-exec-1 798
+192.168.1.100 - - [28/Apr/2019:20:33:02 +0700] "GET /nguoidung/dangNhap/10052121/abc HTTP/1.1" 200 260 http-bio-8899-exec-3 13
+192.168.1.100 - - [28/Apr/2019:22:24:46 +0700] "GET /nguoidung/dangNhap/10052121/abc HTTP/1.1" 200 260 http-bio-8899-exec-1 481
+192.168.1.100 - - [28/Apr/2019:22:25:17 +0700] "GET /nguoidung/dangNhap/10052121/abc HTTP/1.1" 200 260 http-bio-8899-exec-3 12
+192.168.1.100 - - [28/Apr/2019:22:26:28 +0700] "GET /nguoidung/dangNhap/10052121/abc HTTP/1.1" 200 260 http-bio-8899-exec-5 12
+192.168.1.100 - - [28/Apr/2019:22:57:31 +0700] "GET /nguoidung/dangNhap/10052121/abc HTTP/1.1" 200 260 http-bio-8899-exec-1 660
+192.168.1.100 - - [28/Apr/2019:22:57:39 +0700] "GET /nguoidung/dangNhap/10052121/abc HTTP/1.1" 200 260 http-bio-8899-exec-3 12
