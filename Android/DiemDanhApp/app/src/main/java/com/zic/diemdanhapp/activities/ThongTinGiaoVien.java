@@ -1,15 +1,21 @@
 package com.zic.diemdanhapp.activities;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.zxing.Result;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -29,7 +35,10 @@ public class ThongTinGiaoVien extends AppCompatActivity{
     String ma, ten, hinh, ngaysinh, gioitinh, trinhdo, chucvu, tenkhoa;
 
     ProgressDialog progressDialog;
-
+    Toolbar toolbar;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +53,10 @@ public class ThongTinGiaoVien extends AppCompatActivity{
         final TextView txttrinhdo = findViewById(R.id.txtViewTrinhDoGV);
         final TextView txtchucvu = findViewById(R.id.txtViewChucVuGV);
         final TextView txttenkhoa = findViewById(R.id.txtViewKhoaGV);
+        drawerLayout = findViewById(R.id.drawerlayout);
+        toolbar = findViewById(R.id.toolbar);
+        navigationView = findViewById(R.id.navigationview);
+        listView = findViewById(R.id.listview);
 
         // Nhận mã GV từ phần đăng nhập
         Intent nhanpass = getIntent();
