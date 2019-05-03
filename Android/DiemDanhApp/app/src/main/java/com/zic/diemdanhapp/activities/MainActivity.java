@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Sự kiện bấm nút Quên mật khẩu
-        Button btnFor = findViewById(R.id.btnForget);
+        TextView btnFor = findViewById(R.id.btnForget);
         btnFor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,14 +106,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Sự kiện bấm nút Đổi mật khẩu
-        Button btnchange = findViewById(R.id.btnChangePass);
-        btnchange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent chuyenlayoutChange = new Intent(getApplicationContext(), ChangePass.class);
-                startActivity(chuyenlayoutChange);
-            }
-        });
+//        Button btnchange = findViewById(R.id.btnChangePass);
+//        btnchange.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent chuyenlayoutChange = new Intent(getApplicationContext(), ChangePass.class);
+//                startActivity(chuyenlayoutChange);
+//            }
+//        });
     }
 
 

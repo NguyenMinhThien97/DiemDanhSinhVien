@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Điểm danh app</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
     <string-array name="spinForget">
         <item>SĐT</item>
