@@ -21,3 +21,5 @@
 0:0:0:0:0:0:0:1 - - [14/May/2019:22:26:35 -0700] "GET /giaovien/getNgayHoc/10052121/Khoa%CC%81lu%C3%A2%CC%A3nt%C3%B4%CC%81tnghi%C3%AA%CC%A3p HTTP/1.1" 200 - http-bio-8899-exec-8 39
 0:0:0:0:0:0:0:1 - - [14/May/2019:22:28:42 -0700] "GET /giaovien/getNgayHoc/10052121/%22Khoa%CC%81%20lu%C3%A2%CC%A3n%20t%C3%B4%CC%81t%20nghi%C3%AA%CC%A3p%22 HTTP/1.1" 200 - http-bio-8899-exec-10 43
 0:0:0:0:0:0:0:1 - - [14/May/2019:22:39:30 -0700] "GET /giaovien/getTenMonHoc/10052121 HTTP/1.1" 200 - http-bio-8899-exec-1 475
+0:0:0:0:0:0:0:1 - - [14/May/2019:22:41:02 -0700] "GET /giaovien/getTenMonHoc/10052121 HTTP/1.1" 200 190 http-bio-8899-exec-1 622
+0:0:0:0:0:0:0:1 - - [14/May/2019:22:41:15 -0700] "GET /giaovien/getNgayHoc/10052121/1 HTTP/1.1" 200 64 http-bio-8899-exec-3 51
