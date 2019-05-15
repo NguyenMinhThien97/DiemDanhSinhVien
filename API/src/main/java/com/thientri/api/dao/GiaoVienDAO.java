@@ -32,7 +32,7 @@ public class GiaoVienDAO implements GiaoVienIDAO{
 		PreparedStatement smt = null;
 		try {
 			Connection con = app.getConnection();
-			String sql = "SELECT n.ma, m.tenmonhoc,n.ten, p.tenphonghoc, c.buoihoc, c.giobatdau, c.gioketthuc, m.ngaybatdau, m.ngayketthuc, m.namhoc, m.hocky, c.thu FROM cahoc c, monhoc m, phonghoc p, nguoidung n WHERE m.magiaovien = n.ma AND c.maphonghoc = p.maphonghoc AND c.mamonhoc = m.mamonhoc AND n.ma = ? AND n.status= 1";
+			String sql = "SELECT n.ma, m.tenmonhoc,n.ten, p.tenphonghoc, c.buoihoc, c.giobatdau, c.gioketthuc, m.ngaybatdau, m.ngayketthuc, m.namhoc, m.hocky, c.thu FROM cahoc c, monhoc m, phonghoc p, nguoidung n WHERE m.magiaovien = n.ma AND c.maphonghoc = p.maphonghoc AND c.mamonhoc = m.mamonhoc AND n.ma = ? AND n.status= 1 ORDER BY c.giobatdau";
 			smt = con.prepareStatement(sql);
 			smt.setLong(1, maNguoiDung);
 			ResultSet rs= smt.executeQuery();
