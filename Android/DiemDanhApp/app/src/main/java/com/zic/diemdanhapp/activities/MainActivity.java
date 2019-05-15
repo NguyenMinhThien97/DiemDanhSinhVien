@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "nope", Toast.LENGTH_SHORT).show();
         }
 
+
         // Sự kiện bấm nút Login
         Button btnlogin = findViewById(R.id.btnLogin);
         btnlogin.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }).start();
 
-                    //Delay 1.5s để lấy dữ liệu ( phòng trường hợp mạng yếu )
+                    //Delay 1s
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -80,17 +81,8 @@ public class MainActivity extends AppCompatActivity {
                             // Tắt progress bar
                             progressDialog.dismiss();
 
-                            // Chuyển layout nếu pass đúng
-                            if (txtpass.getText().toString().equals(pass)) {
-                                Intent chuyenlayoutSV = new Intent(getApplicationContext(), ThongTinGiaoVien.class);
-                                chuyenlayoutSV.putExtra("ma", ma);
-                                startActivity((chuyenlayoutSV));
-                            } else
-                                Toast.makeText(getApplicationContext(), "Sai mật khẩu ~", Toast.LENGTH_SHORT).show();
                         }
-                    }, 1500);
-
-
+                    }, 1000);
                 }
             }
         });
@@ -104,16 +96,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(chuyenlayoutForget);
             }
         });
-
-        // Sự kiện bấm nút Đổi mật khẩu
-//        Button btnchange = findViewById(R.id.btnChangePass);
-//        btnchange.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent chuyenlayoutChange = new Intent(getApplicationContext(), ChangePass.class);
-//                startActivity(chuyenlayoutChange);
-//            }
-//        });
     }
 
 
@@ -139,11 +121,28 @@ public class MainActivity extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
+
+            EditText txtpass = findViewById(R.id.txtPass);
+
             try {
                 JSONObject jsonObj = new JSONObject(result); // convert String to JSONObject
                 ma = jsonObj.getString("maNguoiDung");
                 pass = jsonObj.getString("matKhau");
                 status = jsonObj.getString("status");
+
+                // Chuyển layout tương ứng nếu pass đúng
+                if (txtpass.getText().toString().equals(pass)) {
+                    if (status.equals("1")) {
+                        Intent chuyenlayoutGV = new Intent(getApplicationContext(), ThongTinGiaoVien.class);
+                        chuyenlayoutGV.putExtra("ma", ma);
+                        startActivity((chuyenlayoutGV));
+                    } else if (status.equals("0")) {
+                        Intent chuyenlayoutSV = new Intent(getApplicationContext(), ThongTinSinhVien.class);
+                        chuyenlayoutSV.putExtra("ma", ma);
+                        startActivity((chuyenlayoutSV));
+                    }
+                } else
+                    Toast.makeText(MainActivity.this, "Sai mật khẩu ~", Toast.LENGTH_SHORT).show();
             } catch (JSONException e) {
                 e.printStackTrace();
             }

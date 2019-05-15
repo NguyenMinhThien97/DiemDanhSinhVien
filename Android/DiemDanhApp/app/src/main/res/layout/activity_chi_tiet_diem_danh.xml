@@ -1,324 +1,638 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical">
 
-    android:layout_height="match_parent">
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fillViewport="false">
 
-    <android.support.constraint.ConstraintLayout
-
-        android:layout_width="match_parent"
-
-        android:layout_height="match_parent"
-
-        android:orientation="vertical">
-
-        <RelativeLayout
-
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <ImageView
-
-                android:id="@+id/devBg"
-
+                android:id="@+id/imageView"
                 android:layout_width="match_parent"
-
-                android:layout_height="160dp"
-
-                android:layout_alignLeft="@+id/labelTenGV"
-
-                android:layout_alignParentTop="true"
-
-                android:scaleType="centerCrop"
-
-                android:src="@drawable/zerothevoid" />
-
-            <ImageView
-
-                android:id="@+id/Dev1"
-
-                android:layout_width="170dp"
-
-                android:layout_height="170dp"
-
-                android:layout_centerHorizontal="true"
-
-                android:layout_marginTop="70dp"
-
-                android:background="@drawable/teacher"
-
-                android:padding="2dp"
-
-                android:scaleType="fitXY" />
+                android:layout_height="70dp"
+                android:layout_gravity=""
+                app:srcCompat="@drawable/logo_iuh" />
 
             <TextView
-
-                android:id="@+id/labelTenGV"
-
+                android:id="@+id/txtViewTitle"
                 android:layout_width="match_parent"
-
-                android:layout_height="match_parent"
-
-                android:layout_below="@+id/Dev1"
-
-                android:layout_centerHorizontal="true"
-
-                android:gravity="center"
-
-                android:text=""
-
-                android:textAppearance="?android:attr/textAppearanceMedium"
-
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:text="CHI TIẾT ĐIỂM DANH"
+                android:textAlignment="center"
+                android:textColor="#040750"
+                android:textSize="15dp"
                 android:textStyle="bold" />
 
-            <TextView
+            <Spinner
+                android:id="@+id/spinMonHoc"
+                android:layout_width="340dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:background="#b0d6ff" />
 
-                android:id="@+id/tvDev1Discp"
+            <Spinner
+                android:id="@+id/spinNgay"
+                android:layout_width="340dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#b0d6ff" />
 
-                android:layout_width="match_parent"
-
+            <Button
+                android:id="@+id/btnInDiemDanh"
+                android:layout_width="152dp"
                 android:layout_height="wrap_content"
-
-                android:layout_below="@+id/labelTenGV"
-
-                android:layout_centerHorizontal="true"
-
-                android:gravity="center"
-
-                android:text="I Have done some coding and designed some UI interface."
-
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-
-            <ImageView
-
-                android:id="@+id/devBg2"
-
-                android:layout_width="match_parent"
-
-                android:layout_height="160dp"
-
-                android:layout_below="@+id/tvDev1Discp"
-
-                android:layout_marginTop="5dp"
-
-                android:scaleType="centerCrop"
-
-                android:src="@drawable/zerothevoid" />
-
-            <ImageView
-
-                android:id="@+id/Dev2"
-
-                android:layout_width="170dp"
-
-                android:layout_height="170dp"
-
-                android:layout_centerHorizontal="true"
-
-                android:layout_marginTop="350dp"
-
-                android:background="@drawable/teacher"
-
-                android:padding="2dp"
-
-                android:scaleType="fitXY" />
-
-            <TextView
-
-                android:id="@+id/txtViewTenGV"
-
-                android:layout_width="match_parent"
-
-                android:layout_height="match_parent"
-
-                android:layout_below="@+id/Dev2"
-
-                android:layout_centerHorizontal="true"
-
-                android:gravity="center"
-
-                android:text=""
-
-                android:textAppearance="?android:attr/textAppearanceMedium"
-
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/button_background"
+                android:text="In"
+                android:textColor="#ffffff"
                 android:textStyle="bold" />
 
-            <TextView
-
-                android:id="@+id/tvDev2Discp"
-
-                android:layout_width="match_parent"
-
+            <Button
+                android:id="@+id/btnCommit"
+                android:layout_width="152dp"
                 android:layout_height="wrap_content"
-
-                android:layout_below="@+id/txtViewTenGV"
-
-                android:layout_centerHorizontal="true"
-
-                android:gravity="center"
-
-                android:text="I Have Designed UI Interface"
-
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-
-            <ImageView
-
-                android:id="@+id/devBg3"
-
-                android:layout_width="match_parent"
-
-                android:layout_height="160dp"
-
-                android:layout_below="@+id/tvDev2Discp"
-
-                android:layout_marginTop="5dp"
-
-                android:scaleType="fitXY"
-
-                android:src="@drawable/zerothevoid" />
-
-
-            <ImageView
-
-                android:id="@+id/Dev3"
-
-                android:layout_width="170dp"
-
-                android:layout_height="170dp"
-
-                android:layout_alignLeft="@+id/Dev2"
-
-                android:layout_alignTop="@+id/devBg3"
-
-                android:layout_marginTop="70dp"
-
-                android:background="@drawable/teacher"
-
-                android:padding="2dp"
-
-                android:scaleType="fitXY" />
-
-            <TextView
-
-                android:id="@+id/textView3"
-
-                android:layout_width="match_parent"
-
-                android:layout_height="wrap_content"
-
-                android:layout_below="@+id/Dev3"
-
-                android:layout_centerHorizontal="true"
-
-                android:gravity="center"
-
-                android:text=""
-
-                android:textAppearance="?android:attr/textAppearanceMedium"
-
+                android:layout_gravity="right"
+                android:layout_marginTop="-70dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/button_background"
+                android:text="Commit"
+                android:textColor="#ffffff"
                 android:textStyle="bold" />
 
-            <TextView
-
-                android:id="@+id/tvDev3Discp"
-
-                android:layout_width="match_parent"
-
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/tableLichHoc"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="0dp"
+                android:background="#000000"
+                android:stretchColumns="1">
 
-                android:layout_below="@+id/textView3"
+                <TableRow
+                    android:id="@+id/rowTitleDiemDanh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:orientation="vertical">
 
-                android:layout_centerHorizontal="true"
+                    <TextView
+                        android:id="@+id/txtTitleTen"
+                        android:layout_width="122dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ttgv_background"
+                        android:padding="10px"
+                        android:text="Tên sinh viên"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
 
-                android:gravity="center"
+                    <TextView
+                        android:id="@+id/txtTitleMa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ttgv_background"
+                        android:padding="10px"
+                        android:text="Mã sinh viên"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
 
-                android:text="I Have Done Testing"
+                    <TextView
+                        android:id="@+id/txtTitleDiemDanh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ttgv_background"
+                        android:padding="10px"
+                        android:text="Điểm danh"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
 
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="Phạm Nguyễn Minh Trí"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="15022571"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:gravity="center">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="#ffffff"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="Nguyễn Minh Thiên"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="15094631"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:gravity="center">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:orientation="vertical">
 
 
-            <ImageView
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="Tì Văn Téo"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
 
-                android:id="@+id/devBg4"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="15011111"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
 
-                android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:gravity="center">
 
-                android:layout_height="160dp"
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
 
-                android:layout_below="@+id/tvDev3Discp"
-
-                android:layout_marginTop="5dp"
-
-                android:scaleType="fitXY"
-
-                android:src="@drawable/zerothevoid" />
-
-            <ImageView
-
-                android:id="@+id/Dev4"
-
-                android:layout_width="170dp"
-
-                android:layout_height="170dp"
-
-                android:layout_alignLeft="@+id/Dev2"
-
-                android:layout_alignTop="@+id/devBg4"
-
-                android:layout_marginTop="70dp"
-
-                android:background="@drawable/teacher"
-
-                android:padding="2dp"
-
-                android:scaleType="fitXY" />
-
-            <TextView
-
-                android:id="@+id/textView4"
-
-                android:layout_width="match_parent"
-
-                android:layout_height="wrap_content"
-
-                android:layout_below="@+id/Dev4"
-
-                android:layout_centerHorizontal="true"
-
-                android:gravity="center"
-
-                android:text=""
-
-                android:textAppearance="?android:attr/textAppearanceMedium"
-
-                android:textStyle="bold" />
-
-            <TextView
-
-                android:id="@+id/tvDev4Discp"
-
-                android:layout_width="match_parent"
-
-                android:layout_height="wrap_content"
-
-                android:layout_below="@+id/textView4"
-
-                android:layout_centerHorizontal="true"
-
-                android:gravity="center"
-
-                android:text="I have done testing on application behaviour and functions"
-
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                    </LinearLayout>
 
 
-        </RelativeLayout>
+                </TableRow>
 
-    </android.support.constraint.ConstraintLayout>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:orientation="vertical">
 
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="Tì Văn Téo"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="15011111"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:gravity="center">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="Tì Văn Téo"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="15011111"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:gravity="center">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="Tì Văn Téo"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="15011111"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:gravity="center">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="Tì Văn Téo"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="15011111"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:gravity="center">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="Tì Văn Téo"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="15011111"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:gravity="center">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="Tì Văn Téo"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="15011111"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:gravity="center">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="Tì Văn Téo"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="15011111"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:gravity="center">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="Tì Văn Téo"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="15011111"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:gravity="center">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="Tì Văn Téo"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:padding="10px"
+                        android:text="15011111"
+                        android:textAlignment="center"
+                        android:textColor="#040750"
+                        android:textSize="15dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@drawable/row_xem_lich_white"
+                        android:gravity="center">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
 
 </ScrollView>
