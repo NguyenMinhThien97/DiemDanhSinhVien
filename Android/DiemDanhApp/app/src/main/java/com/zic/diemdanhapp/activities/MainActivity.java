@@ -37,12 +37,12 @@ public class MainActivity extends AppCompatActivity {
         final TextView txtname = findViewById(R.id.txtName);
         final EditText txtpass = findViewById(R.id.txtPass);
 
-        //Kiểm tra coi có kết nối mạng hay không
-        if (isConnected()) {
-            Toast.makeText(this, "Is connected", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "nope", Toast.LENGTH_SHORT).show();
-        }
+//        //Kiểm tra coi có kết nối mạng hay không
+//        if (isConnected()) {
+//            Toast.makeText(this, "Is connected", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(this, "nope", Toast.LENGTH_SHORT).show();
+//        }
 
 
         // Sự kiện bấm nút Login

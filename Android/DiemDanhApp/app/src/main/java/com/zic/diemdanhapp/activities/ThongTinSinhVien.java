@@ -116,7 +116,7 @@ public class ThongTinSinhVien extends AppCompatActivity {
             case R.id.xemLichDay:
                 Intent intentb1 = new Intent(ThongTinSinhVien.this, XemLichHoc.class);
                 intentb1.putExtra("ma", manhanduoc);
-                intentb1.putExtra("status", "1");
+                intentb1.putExtra("status", "0");
                 startActivity(intentb1);
                 break;
             case R.id.doiMatKhau:
