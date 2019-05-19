@@ -4,10 +4,13 @@ D:\Android\DiemDanhSinhVien\API\src\main\java\com\thientri\api\config\SpringWebA
 D:\Android\DiemDanhSinhVien\API\src\main\java\com\thientri\api\model\MonHocHienTai.java
 D:\Android\DiemDanhSinhVien\API\src\main\java\com\thientri\api\model\PhongHoc.java
 D:\Android\DiemDanhSinhVien\API\src\main\java\com\thientri\api\config\WebMvcConfig.java
+D:\Android\DiemDanhSinhVien\API\src\main\java\com\thientri\api\model\FileChiTietDiemDanh.java
 D:\Android\DiemDanhSinhVien\API\src\main\java\com\thientri\api\idao\GiaoVienIDAO.java
+D:\Android\DiemDanhSinhVien\API\src\main\java\com\thientri\api\model\DiemDanhSinhVien.java
 D:\Android\DiemDanhSinhVien\API\src\main\java\com\thientri\api\idao\SinhVienIDAO.java
 D:\Android\DiemDanhSinhVien\API\src\main\java\com\thientri\api\model\CaHoc.java
 D:\Android\DiemDanhSinhVien\API\src\main\java\com\thientri\api\model\Lich.java
+D:\Android\DiemDanhSinhVien\API\src\main\java\com\thientri\api\model\SinhVien.java
 D:\Android\DiemDanhSinhVien\API\src\main\java\com\thientri\api\controller\NguoiDungController.java
 D:\Android\DiemDanhSinhVien\API\src\main\java\com\thientri\api\dao\GiaoVienDAO.java
 D:\Android\DiemDanhSinhVien\API\src\main\java\com\thientri\api\config\ApplicationContextConfig.java

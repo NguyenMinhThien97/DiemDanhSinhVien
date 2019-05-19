@@ -27,9 +27,11 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class ThongTinSinhVien extends AppCompatActivity {
 
-    String manhanduoc;
+    String manhanduoc, passnhanduoc;
 
     String ma, ten, hinh, ngaysinh, gioitinh, sdt, email, tenlop, trinhdo, chucvu, tenkhoa, pass;
+
+    String mamon, tenmon, ngaybd, ngaykt, tenphong, giobd, giokt;
 
     ProgressDialog progressDialog;
     DrawerLayout drawerLayout;
@@ -44,10 +46,16 @@ public class ThongTinSinhVien extends AppCompatActivity {
         // Nhận mã SV từ phần đăng nhập
         Intent nhanpass = getIntent();
         manhanduoc = nhanpass.getStringExtra("ma");
+        passnhanduoc = nhanpass.getStringExtra("pass");
+
 
         // Lấy thông tin GV theo mã
         String urlthongtinsinhvien = "nguoidung/findById/" + manhanduoc;
         new HttpAsyncTask().execute(MethodChung.CreateURL() + urlthongtinsinhvien);
+
+        //Lấy môn học hiện tại
+        String urlmonhientai = "sinhvien/monHocHienTai/" + manhanduoc + "/" + passnhanduoc;
+        new HttpAsyncTaskMonHienTaiSV().execute(MethodChung.CreateURL() + urlmonhientai);
 
         drawerLayout = findViewById(R.id.drawerlayout);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
@@ -108,9 +116,9 @@ public class ThongTinSinhVien extends AppCompatActivity {
         Class fragmentClass;
         switch (menuItem.getItemId()) {
             case R.id.bangDiemDanh:
-                Intent intentb = new Intent(ThongTinSinhVien.this, ChiTietDiemDanh.class);
+                Intent intentb = new Intent(ThongTinSinhVien.this, ChiTietDiemDanhSV.class);
                 intentb.putExtra("ma", manhanduoc);
-                intentb.putExtra("status", "1");
+                intentb.putExtra("status", "0");
                 startActivity(intentb);
                 break;
             case R.id.xemLichDay:
@@ -123,6 +131,7 @@ public class ThongTinSinhVien extends AppCompatActivity {
                 Intent intentb2 = new Intent(ThongTinSinhVien.this, ChangePass.class);
                 intentb2.putExtra("ma", manhanduoc);
                 intentb2.putExtra("status", "0");
+                intentb2.putExtra("ten", ten);
                 startActivity(intentb2);
                 break;
             case R.id.dangXuat:
@@ -185,6 +194,52 @@ public class ThongTinSinhVien extends AppCompatActivity {
                 tenNavi.setText(ten);
                 lopNavi.setText(tenlop);
                 maNavi.setText(ma);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+
+    //Hàm xử lý JSON môn học hiện tại
+    private class HttpAsyncTaskMonHienTaiSV extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+
+            return MethodChung.GET(urls[0]);
+        }
+
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+
+            TextView txtmagv = findViewById(R.id.txtViewMaMonHocGV);
+            TextView txttengv = findViewById(R.id.txtViewTenMonHocGV);
+            TextView txtphong = findViewById(R.id.txtViewTenPhongHocGV);
+            TextView txtgiobd = findViewById(R.id.txtViewGioBatDauGV);
+            TextView txtgiokt = findViewById(R.id.txtViewGioKetThucGV);
+
+            Toast.makeText(ThongTinSinhVien.this, "Try", Toast.LENGTH_SHORT).show();
+
+            try {
+                JSONObject jsonObj = new JSONObject(result); // convert String to JSONObject
+                mamon = jsonObj.getString("maMonHoc");
+                tenmon = jsonObj.getString("tenMonHoc");
+                ngaybd = jsonObj.getString("ngayBatDau");
+                ngaykt = jsonObj.getString("ngayKetThuc");
+                tenphong = jsonObj.getString("tenPhongHoc");
+                giobd = jsonObj.getString("gioBatDau");
+                giokt = jsonObj.getString("gioKetThuc");
+
+                Toast.makeText(ThongTinSinhVien.this, "something: " + giobd, Toast.LENGTH_SHORT).show();
+
+                txtmagv.setText(mamon);
+                txttengv.setText(tenmon);
+                txtphong.setText(tenphong);
+                txtgiobd.setText(giobd);
+                txtgiokt.setText(giokt);
 
             } catch (JSONException e) {
                 e.printStackTrace();

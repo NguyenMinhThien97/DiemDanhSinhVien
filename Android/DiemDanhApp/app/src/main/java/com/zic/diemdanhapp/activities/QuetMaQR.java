@@ -48,6 +48,9 @@ public class QuetMaQR extends AppCompatActivity implements ZXingScannerView.Resu
     @Override
     public void handleResult(Result result) {
         //hiện kết quả quét được lên màn hình
+        Toast.makeText(this, result.getText(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, manhanduoc, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
 
         if (status.equals("1"))
             urlqr = MethodChung.CreateURL() + "giaovien/quetQRDiemDanh/" + result.toString() +
@@ -87,6 +90,7 @@ public class QuetMaQR extends AppCompatActivity implements ZXingScannerView.Resu
             } else {
                 Toast.makeText(getApplicationContext(), "Mã không đúng\n Hãy thử lại!", Toast.LENGTH_SHORT).show();
             }
+
         }
     }
 }

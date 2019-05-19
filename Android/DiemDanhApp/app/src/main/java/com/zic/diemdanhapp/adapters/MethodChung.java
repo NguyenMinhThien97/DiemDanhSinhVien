@@ -12,13 +12,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class MethodChung
-{
-    public static String CreateURL(){
+public class MethodChung {
+    public static String CreateURL() {
         return "http://192.168.43.21:8899/";
     }
 
-    public static String GET(String url){
+//    public static String CreateURL(){
+//        return "http://192.168.43.21:8899/";
+//    }
+
+
+    public static String GET(String url) {
         InputStream inputStream = null;
         String result = "";
         try {
@@ -33,7 +37,7 @@ public class MethodChung
             inputStream = httpResponse.getEntity().getContent();
 
             // convert inputstream to string
-            if(inputStream != null)
+            if (inputStream != null)
                 result = convertInputStreamToString(inputStream);
             else
                 result = "Did not work!";
@@ -46,10 +50,10 @@ public class MethodChung
     }
 
     private static String convertInputStreamToString(InputStream inputStream) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         String line = "";
         String result = "";
-        while((line = bufferedReader.readLine()) != null)
+        while ((line = bufferedReader.readLine()) != null)
             result += line;
 
         inputStream.close();

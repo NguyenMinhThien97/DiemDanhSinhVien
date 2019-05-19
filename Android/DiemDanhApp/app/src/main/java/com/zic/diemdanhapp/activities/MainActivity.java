@@ -1,5 +1,6 @@
 package com.zic.diemdanhapp.activities;
 
+import android.app.Application;
 import android.app.ProgressDialog;
 import android.os.Handler;
 
@@ -36,14 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
         final TextView txtname = findViewById(R.id.txtName);
         final EditText txtpass = findViewById(R.id.txtPass);
-
-//        //Kiểm tra coi có kết nối mạng hay không
-//        if (isConnected()) {
-//            Toast.makeText(this, "Is connected", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(this, "nope", Toast.LENGTH_SHORT).show();
-//        }
-
 
         // Sự kiện bấm nút Login
         Button btnlogin = findViewById(R.id.btnLogin);
@@ -99,15 +92,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //Hàm kiểm tra kết nối mạng
-    public boolean isConnected() {
-        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(MainActivity.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected())
-            return true;
-        else
-            return false;
-    }
+//    //Hàm kiểm tra kết nối mạng
+//    public boolean isConnected() {
+//        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(MainActivity.CONNECTIVITY_SERVICE);
+//        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+//        if (networkInfo != null && networkInfo.isConnected())
+//            return true;
+//        else
+//            return false;
+//    }
 
 
     //Hàm xử lý JSON
@@ -135,10 +128,12 @@ public class MainActivity extends AppCompatActivity {
                     if (status.equals("1")) {
                         Intent chuyenlayoutGV = new Intent(getApplicationContext(), ThongTinGiaoVien.class);
                         chuyenlayoutGV.putExtra("ma", ma);
+                        chuyenlayoutGV.putExtra("pass", pass);
                         startActivity((chuyenlayoutGV));
                     } else if (status.equals("0")) {
                         Intent chuyenlayoutSV = new Intent(getApplicationContext(), ThongTinSinhVien.class);
                         chuyenlayoutSV.putExtra("ma", ma);
+                        chuyenlayoutSV.putExtra("pass", pass);
                         startActivity((chuyenlayoutSV));
                     }
                 } else
@@ -148,6 +143,13 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    // Không cho bấm nút Back
+    @Override
+    public void onBackPressed() {
+        System.exit(0);
+
     }
 
 }

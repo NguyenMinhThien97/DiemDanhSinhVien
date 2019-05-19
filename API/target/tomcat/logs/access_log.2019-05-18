@@ -1,0 +1,10 @@
+0:0:0:0:0:0:0:1 - - [18/May/2019:10:08:58 +0700] "GET /sinhvien/getTenMonHoc/15094631 HTTP/1.1" 200 73 http-bio-8899-exec-1 430
+0:0:0:0:0:0:0:1 - - [18/May/2019:10:08:58 +0700] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8899-exec-3 18
+0:0:0:0:0:0:0:1 - - [18/May/2019:10:09:11 +0700] "GET /sinhvien/xemChiTietDiemDanh/15094631/1 HTTP/1.1" 200 12 http-bio-8899-exec-4 99
+0:0:0:0:0:0:0:1 - - [18/May/2019:10:11:11 +0700] "GET /sinhvien/xemChiTietDiemDanh/15094631/1 HTTP/1.1" 200 12 http-bio-8899-exec-7 57
+0:0:0:0:0:0:0:1 - - [18/May/2019:10:12:23 +0700] "GET /sinhvien/xemChiTietDiemDanh/15094631/1 HTTP/1.1" 200 12 http-bio-8899-exec-1 462
+0:0:0:0:0:0:0:1 - - [18/May/2019:10:13:55 +0700] "GET /sinhvien/xemChiTietDiemDanh/15094631/1 HTTP/1.1" 200 288 http-bio-8899-exec-1 461
+0:0:0:0:0:0:0:1 - - [18/May/2019:23:12:55 +0700] "GET /giaovien/fileChiTietDiemDanh/10052121/1 HTTP/1.1" 200 14 http-bio-8899-exec-1 1903
+0:0:0:0:0:0:0:1 - - [18/May/2019:23:17:13 +0700] "GET /giaovien/getNgayHoc/10052121/1 HTTP/1.1" 200 299 http-bio-8899-exec-4 59
+0:0:0:0:0:0:0:1 - - [18/May/2019:23:20:40 +0700] "GET /giaovien/fileChiTietDiemDanh/10052121/1 HTTP/1.1" 200 14 http-bio-8899-exec-1 2022
+0:0:0:0:0:0:0:1 - - [18/May/2019:23:24:36 +0700] "GET /giaovien/fileChiTietDiemDanh/10052121/1 HTTP/1.1" 200 14 http-bio-8899-exec-4 1886

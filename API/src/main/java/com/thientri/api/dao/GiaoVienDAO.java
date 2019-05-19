@@ -17,9 +17,11 @@ import org.springframework.stereotype.Repository;
 import com.thientri.api.config.ApplicationContextConfig;
 import com.thientri.api.idao.GiaoVienIDAO;
 import com.thientri.api.model.ChiTietDiemDanh;
+import com.thientri.api.model.FileChiTietDiemDanh;
 import com.thientri.api.model.Lich;
 import com.thientri.api.model.MonHoc;
 import com.thientri.api.model.MonHocHienTai;
+import com.thientri.api.model.SinhVien;
 
 @Repository
 public class GiaoVienDAO implements GiaoVienIDAO{
@@ -97,40 +99,27 @@ public class GiaoVienDAO implements GiaoVienIDAO{
 		return list;
 	}
 
-	public List<ChiTietDiemDanh> fileChiTietDiemDanh(long maMonHoc) {
-		ArrayList<ChiTietDiemDanh> list = new ArrayList<ChiTietDiemDanh>() ;
+	public String CheckDiemDanh(long maMonHoc, String ngayDiemDanh, long maSinhVien) {
+		ArrayList<FileChiTietDiemDanh> list = new ArrayList<FileChiTietDiemDanh>() ;
 		PreparedStatement smt = null;
+		String tenSinhVien = null ;
 		try {
 			Connection con = app.getConnection();
-			String sql = "SELECT n.ma, n.ten, n.tenlop, n.hinh, n.gioitinh,c.ngaydiemdanh, c.status , c.lydonghi FROM nguoidung n, diemdanh d, chitietdiemdanh c WHERE c.madiemdanh = d.madiemdanh AND d.masinhvien =n.ma AND d.mamonhoc = ? AND n.status = 0";
+			String sql = "SELECT n.ten FROM nguoidung n, diemdanh d, chitietdiemdanh c WHERE c.madiemdanh = d.madiemdanh AND d.masinhvien =n.ma AND d.mamonhoc = ? AND c.ngaydiemdanh = ? AND n.status = 0 AND n.ma = ?";
 			smt = con.prepareStatement(sql);
 			smt.setLong(1, maMonHoc);
+			smt.setString(2, ngayDiemDanh);
+			smt.setLong(3, maSinhVien);
 			ResultSet rs= smt.executeQuery();
 			while(rs.next()) {
-				long maSinhVien = rs.getLong("ma");
-
-				String tenSinhVien = rs.getString("ten");
-				
-				String tenLop = rs.getString("tenlop");
-
-				String hinh = rs.getString("hinh");
-				
-				String gioitinh = rs.getString("gioitinh");
-				
-				String ngayDiemDanh = rs.getString("ngaydiemdanh");
-				
-				String lyDoNghi = rs.getString("lydonghi");
-				
-				boolean status = rs.getBoolean("status");
-				ChiTietDiemDanh c = new  ChiTietDiemDanh(maSinhVien, tenSinhVien, tenLop, hinh, gioitinh, ngayDiemDanh, lyDoNghi, status);
-				list.add(c);
+				tenSinhVien = rs.getString("ten");
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return list;
+		return tenSinhVien;
 	}
 	
 	public boolean quetQRDiemDanh(long maSinhVien, long maGiaoVien, String matKhauGiaoVien) {
@@ -260,7 +249,6 @@ public class GiaoVienDAO implements GiaoVienIDAO{
 	public List<String> getNgayHoc(long maGiaoVien, long maMonHoc) {
 		PreparedStatement smt = null;
 		List<String> list = new ArrayList<String>();
-		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		String ngaybatdau = null;
 		String ngayketthuc = null;
 		String thu = null;
@@ -309,6 +297,46 @@ public class GiaoVienDAO implements GiaoVienIDAO{
 		return list;
 	}
 
+	public boolean taoListChiTietDiemDanh(long maGiaoVien, long maMonHoc) {
+		PreparedStatement smt = null;
+		long maDiemDanh = 0;
+		int n=0;
+		long madiemdanh = getMaDiemDanh(maGiaoVien, maMonHoc);
+		List<String> ngayHoc = getNgayHoc(maGiaoVien, maMonHoc);
+		for (String ngaydiemdanh : ngayHoc) {
+			try {
+				Connection con = app.getConnection();
+				String sql = "INSERT INTO chitietdiemdanh (madiemdanh,ngaydiemdanh) VALUES(?,?)";
+				smt = con.prepareStatement(sql);
+				smt.setLong(1, madiemdanh);
+				smt.setString(2, ngaydiemdanh);
+				n = smt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return n>0;
+	}
+	
+	public long getMaDiemDanh(long maGiaoVien, long maMonHoc) {
+		PreparedStatement smt = null;
+		long maDiemDanh = 0;
+		
+		try {
+			Connection con = app.getConnection();
+			String sql = "SELECT d.madiemdanh FROM diemdanh d WHERE d.magiaovien = ? AND d.mamonhoc = ?";
+			smt = con.prepareStatement(sql);
+			smt.setLong(2, maGiaoVien);
+			smt.setLong(2, maMonHoc);
+			ResultSet rs= smt.executeQuery();
+			while(rs.next()) {
+				maDiemDanh = rs.getLong("madiemdanh");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return maDiemDanh;
+	}
 	public String tenMonHoc(long maMonHoc) {
 		PreparedStatement smt = null;
 		String tenmonhoc = null;
@@ -326,6 +354,55 @@ public class GiaoVienDAO implements GiaoVienIDAO{
 			e.printStackTrace();
 		}
 		return tenmonhoc;
+	}
+	
+	public List<SinhVien> getThongTinSinhVien(long maMonHoc) {
+		
+		PreparedStatement smt = null;
+		List<SinhVien> list = new ArrayList<SinhVien>();
+		SinhVien s = null;
+		
+		try {
+			Connection con = app.getConnection();
+			String sql = "SELECT n.ma, n.ten, n.tenlop, n.gioitinh FROM diemdanh d, nguoidung n WHERE d.masinhvien = n.ma AND d.mamonhoc = ?";
+			smt = con.prepareStatement(sql);
+			smt.setLong(1, maMonHoc);
+			ResultSet rs= smt.executeQuery();
+			while(rs.next()) {
+				long maSinhVien = rs.getLong("ma");
+
+				String tenSinhVien = rs.getString("ten");
+				
+				String tenLop = rs.getString("tenlop");
+				
+				String gioiTinh = rs.getString("gioitinh");
+				s = new SinhVien(maSinhVien, tenSinhVien, tenLop, gioiTinh);
+				list.add(s);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+public String getEmailGV(long maGiaoVien) {
+		
+		PreparedStatement smt = null;
+		String email = null;
+		
+		try {
+			Connection con = app.getConnection();
+			String sql = "SELECT n.email FROM nguoidung n WHERE n.ma = ? AND n.status = 1";
+			smt = con.prepareStatement(sql);
+			smt.setLong(1, maGiaoVien);
+			ResultSet rs= smt.executeQuery();
+			while(rs.next()) {
+				email = rs.getString("email");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return email;
 	}
 
 }

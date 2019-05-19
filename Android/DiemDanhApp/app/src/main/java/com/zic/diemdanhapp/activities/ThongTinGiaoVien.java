@@ -31,11 +31,14 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class ThongTinGiaoVien extends AppCompatActivity {
 
-    String manhanduoc;
+    String manhanduoc, passnhanduoc;
 
     String ma, ten, hinh, ngaysinh, gioitinh, trinhdo, chucvu, tenkhoa, pass;
 
-    ProgressDialog progressDialog;
+    String mamon, tenmon, ngaybd, ngaykt, tenphong, giobd, giokt;
+
+//    ProgressDialog progressDialog;
+
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
 
@@ -45,13 +48,19 @@ public class ThongTinGiaoVien extends AppCompatActivity {
         setContentView(R.layout.activity_thong_tin_giao_vien);
         getSupportActionBar().hide();
 
-        // Nhận mã GV từ phần đăng nhập
+        // Nhận mã SV từ phần đăng nhập
         Intent nhanpass = getIntent();
         manhanduoc = nhanpass.getStringExtra("ma");
+        passnhanduoc = nhanpass.getStringExtra("pass");
 
         // Lấy thông tin GV theo mã
         String urlthongtingiaovien = "nguoidung/findById/" + manhanduoc;
         new HttpAsyncTask().execute(MethodChung.CreateURL() + urlthongtingiaovien);
+
+        //Lấy môn học hiện tại
+        String urlmonhientai = "giaovien/monHocHienTai/" + manhanduoc + "/" + passnhanduoc;
+        new HttpAsyncTaskMonHienTaiGV().execute(MethodChung.CreateURL() + urlmonhientai);
+
 
         drawerLayout = findViewById(R.id.drawerlayout);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
@@ -68,28 +77,6 @@ public class ThongTinGiaoVien extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setupDrawerContent(navigationView);
-
-//        // Hiện progress bar
-//        progressDialog = new ProgressDialog(ThongTinGiaoVien.this);
-//        progressDialog.setMessage("Loading..."); // Setting Message
-//        progressDialog.setTitle("Đang kiểm tra ~"); // Setting Title
-//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
-//        progressDialog.show(); // Display Progress Dialog
-//        progressDialog.setCancelable(false);
-//        new Thread(new Runnable() {
-//            public void run() {
-//            }
-//        }).start();
-//
-//        //Delay 1.5s để lấy dữ liệu ( phòng trường hợp mạng yếu )
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                // Tắt progress bar
-//                progressDialog.dismiss();
-//            }
-//        }, 1500);
 
         // Sự kiện bấm nút Quét mã QR
         Button btnqr = findViewById(R.id.btnQRGV);
@@ -125,6 +112,7 @@ public class ThongTinGiaoVien extends AppCompatActivity {
                 Intent intentb2 = new Intent(ThongTinGiaoVien.this, ChangePass.class);
                 intentb2.putExtra("ma", manhanduoc);
                 intentb2.putExtra("status", "1");
+                intentb2.putExtra("ten", ten);
                 startActivity(intentb2);
                 break;
             case R.id.dangXuat:
@@ -184,6 +172,52 @@ public class ThongTinGiaoVien extends AppCompatActivity {
                 tenNavi.setText(ten);
                 lopNavi.setText(tenkhoa);
                 maNavi.setText(ma);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+
+    //Hàm xử lý JSON môn học hiện tại
+    private class HttpAsyncTaskMonHienTaiGV extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+
+            return MethodChung.GET(urls[0]);
+        }
+
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+
+            TextView txtmagv = findViewById(R.id.txtViewMaMonHocGV);
+            TextView txttengv = findViewById(R.id.txtViewTenMonHocGV);
+            TextView txtphong = findViewById(R.id.txtViewTenPhongHocGV);
+            TextView txtgiobd = findViewById(R.id.txtViewGioBatDauGV);
+            TextView txtgiokt = findViewById(R.id.txtViewGioKetThucGV);
+
+            Toast.makeText(ThongTinGiaoVien.this, "Try", Toast.LENGTH_SHORT).show();
+
+            try {
+                JSONObject jsonObj = new JSONObject(result); // convert String to JSONObject
+                mamon = jsonObj.getString("maMonHoc");
+                tenmon = jsonObj.getString("tenMonHoc");
+                ngaybd = jsonObj.getString("ngayBatDau");
+                ngaykt = jsonObj.getString("ngayKetThuc");
+                tenphong = jsonObj.getString("tenPhongHoc");
+                giobd = jsonObj.getString("gioBatDau");
+                giokt = jsonObj.getString("gioKetThuc");
+
+                Toast.makeText(ThongTinGiaoVien.this, "something: " + giobd, Toast.LENGTH_SHORT).show();
+
+                txtmagv.setText(mamon);
+                txttengv.setText(tenmon);
+                txtphong.setText(tenphong);
+                txtgiobd.setText(giobd);
+                txtgiokt.setText(giokt);
 
             } catch (JSONException e) {
                 e.printStackTrace();
