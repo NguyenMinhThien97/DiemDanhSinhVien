@@ -186,9 +186,11 @@ public class SinhVienDAO implements SinhVienIDAO{
 		PreparedStatement smt = null;
 		List<DiemDanhSinhVien> listMonHoc = new ArrayList<DiemDanhSinhVien>();
 		DiemDanhSinhVien m = null;
-		String ngaydiemdanh= null;
-		boolean status;
+		String ngayDD = null;
+		Date ngaydiemdanh= null;
+		int status;
 		List<String> ngayhoc = getNgayHoc(maSinhVien, maMonHoc);
+		DateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		try {
 			Connection con = app.getConnection();
 			String sql = "SELECT c.ngaydiemdanh ,c.status FROM diemdanh d, chitietdiemdanh c WHERE d.madiemdanh = c.madiemdanh AND d.masinhvien =? AND d.mamonhoc = ?";
@@ -197,9 +199,10 @@ public class SinhVienDAO implements SinhVienIDAO{
 			smt.setLong(2, maMonHoc);
 			ResultSet rs= smt.executeQuery();
 			while(rs.next()) {
-				ngaydiemdanh = rs.getString("ngaydiemdanh");
-				status = rs.getBoolean("status");
-				m = new DiemDanhSinhVien(ngaydiemdanh, status);
+				ngaydiemdanh = rs.getDate("ngaydiemdanh");
+				ngayDD = simpleDateFormat.format(ngaydiemdanh);
+				status = rs.getInt("status");
+				m = new DiemDanhSinhVien(ngayDD, status);
 				listMonHoc.add(m);
 			}
 		} catch (Exception e) {
@@ -211,52 +214,126 @@ public class SinhVienDAO implements SinhVienIDAO{
 	public List<String> getNgayHoc(long maSinhVien, long maMonHoc) {
 		PreparedStatement smt = null;
 		List<String> list = new ArrayList<String>();
-		String ngaybatdau = null;
-		String ngayketthuc = null;
+		String ngayDiemDanh = null;
+		Date ngaydiemdanh = null;
 		String thu = null;
+		DateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		try {
 			Connection con = app.getConnection();
-			String sql = "SELECT m.ngaybatdau, m.ngayketthuc,c.thu FROM monhoc m , nguoidung n, cahoc c, diemdanh d WHERE d.masinhvien = n.ma AND d.mamonhoc = m.mamonhoc AND n.status = 0 AND m.mamonhoc = c.macahoc AND n.ma = ? AND m.mamonhoc = ?";
+			String sql = "SELECT DISTINCT c.ngaydiemdanh FROM diemdanh d, chitietdiemdanh c WHERE d.madiemdanh = c.madiemdanh AND d.masinhvien = ? AND d.mamonhoc = ?";
 			smt = con.prepareStatement(sql);
 			smt.setLong(1, maSinhVien);
 			smt.setLong(2, maMonHoc);
 			ResultSet rs= smt.executeQuery();
 			while(rs.next()) {
-				ngaybatdau = rs.getString("ngaybatdau");
-				ngayketthuc = rs.getString("ngayketthuc");
-				thu = rs.getString("thu");
+				ngaydiemdanh = rs.getDate("ngaydiemdanh");
+				ngayDiemDanh = simpleDateFormat.format(ngaydiemdanh);
+				list.add(ngayDiemDanh);
 			}
-			
-
-			DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			
-			LocalDate start = LocalDate.parse(ngaybatdau);
-			LocalDate end = LocalDate.parse(ngayketthuc);
-			Calendar calendar = Calendar.getInstance();
-
-
-			Date  ngayBatDau = simpleDateFormat.parse(ngaybatdau);
-			Date  ngayKetThuc = simpleDateFormat.parse(ngayketthuc);
-
-			long getDiff = ngayKetThuc.getTime() - ngayBatDau.getTime();
-
-			long getDaysDiff = getDiff / (24 * 60 * 60 * 1000);
-			for (long i = 0; i < getDaysDiff; i++) {
-				
-				start=start.plusDays(1);
-				Date ngay = simpleDateFormat.parse(start.toString());
-		        calendar.setTime(ngay);
-		        String thuOfDay =calendar.get(Calendar.DAY_OF_WEEK)+"";
-				if(thuOfDay.trim().equals(thu)) {
-					list.add(start.toString());
-				}
-			}
-		
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return list;
 	}
+//	public List<String> getNgayHoc(long maSinhVien, long maMonHoc) {
+//		PreparedStatement smt = null;
+//		List<String> list = new ArrayList<String>();
+//		String ngaybatdau = null;
+//		String ngayketthuc = null;
+//		String thu = null;
+//		try {
+//			Connection con = app.getConnection();
+//			String sql = "SELECT m.ngaybatdau, m.ngayketthuc,c.thu FROM monhoc m , nguoidung n, cahoc c, diemdanh d WHERE d.masinhvien = n.ma AND d.mamonhoc = m.mamonhoc AND n.status = 0 AND m.mamonhoc = c.macahoc AND n.ma = ? AND m.mamonhoc = ?";
+//			smt = con.prepareStatement(sql);
+//			smt.setLong(1, maSinhVien);
+//			smt.setLong(2, maMonHoc);
+//			ResultSet rs= smt.executeQuery();
+//			while(rs.next()) {
+//				ngaybatdau = rs.getString("ngaybatdau");
+//				ngayketthuc = rs.getString("ngayketthuc");
+//				thu = rs.getString("thu");
+//			}
+//			
+//
+//			DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//			
+//			LocalDate start = LocalDate.parse(ngaybatdau);
+//			LocalDate end = LocalDate.parse(ngayketthuc);
+//			Calendar calendar = Calendar.getInstance();
+//
+//
+//			Date  ngayBatDau = simpleDateFormat.parse(ngaybatdau);
+//			Date  ngayKetThuc = simpleDateFormat.parse(ngayketthuc);
+//
+//			long getDiff = ngayKetThuc.getTime() - ngayBatDau.getTime();
+//
+//			long getDaysDiff = getDiff / (24 * 60 * 60 * 1000);
+//			for (long i = 0; i < getDaysDiff; i++) {
+//				
+//				start=start.plusDays(1);
+//				Date ngay = simpleDateFormat.parse(start.toString());
+//		        calendar.setTime(ngay);
+//		        String thuOfDay =calendar.get(Calendar.DAY_OF_WEEK)+"";
+//				if(thuOfDay.trim().equals(thu)) {
+//					list.add(start.toString());
+//				}
+//			}
+//		
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return list;
+//	}
 
+//	public boolean quetQRDiemDanhLan1(String tenPhongHoc, long maSinhVien, String matKhau) {
+//		// lấy mã diem danh của môn học hiện tại
+//		long madiemdanh = getMaDiemdanh(maSinhVien, maGiaoVien, matKhauGiaoVien);
+//		int n = 0;
+//		if(madiemdanh != 0 && checkQuetMaLan1(maGiaoVien, matKhauGiaoVien) == true) {
+//			// Ngày hiện tại
+//			LocalDate now = LocalDate.now();
+//			PreparedStatement smt = null;
+//			try {
+//				Connection con = app.getConnection();
+//				String sql = "UPDATE chitietdiemdanh c, diemdanh d set c.status = 2 WHERE d.madiemdanh = c.madiemdanh AND d.magiaovien = ? AND d.masinhvien = ? AND c.ngaydiemdanh = ? AND d.madiemdanh=?";
+//				smt = con.prepareStatement(sql);
+//				smt.setLong(1, maGiaoVien);
+//				smt.setLong(2, maSinhVien);
+//				smt.setString(3, now.toString());
+//				smt.setLong(4, madiemdanh);
+//				n = smt.executeUpdate();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		return n>0;
+//		
+//	}
+//	
+//	public boolean quetQRDiemDanhLan2(long maSinhVien, long maGiaoVien, String matKhauGiaoVien) {
+//		// lấy mã diem danh của môn học hiện tại
+//		long madiemdanh = getMaDiemdanh(maSinhVien, maGiaoVien, matKhauGiaoVien);
+//		int n = 0;
+//		if(madiemdanh != 0 && checkQuetMaLan2(maGiaoVien, matKhauGiaoVien) == true) {
+//			// Ngày hiện tại
+//			LocalDate now = LocalDate.now();
+//			PreparedStatement smt = null;
+//			try {
+//				Connection con = app.getConnection();
+//				String sql = "UPDATE chitietdiemdanh c, diemdanh d set c.status = 1 WHERE d.madiemdanh = c.madiemdanh AND d.magiaovien = ? AND d.masinhvien = ? AND c.ngaydiemdanh = ? AND d.madiemdanh=?";
+//				smt = con.prepareStatement(sql);
+//				smt.setLong(1, maGiaoVien);
+//				smt.setLong(2, maSinhVien);
+//				smt.setString(3, now.toString());
+//				smt.setLong(4, madiemdanh);
+//				n = smt.executeUpdate();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		return n>0;
+//		
+//	}
 }

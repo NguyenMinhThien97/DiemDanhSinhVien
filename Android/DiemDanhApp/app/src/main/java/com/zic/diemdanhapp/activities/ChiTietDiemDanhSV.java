@@ -156,9 +156,9 @@ public class ChiTietDiemDanhSV extends AppCompatActivity {
                     String ngay = obj.getString("ngayDiemDanh");
                     String stat = obj.getString("status");
 
-                    if (stat.equals("true"))
+                    if (stat.equals("1"))
                         stat = "V";
-                    else
+                    else if (stat.equals("0"))
                         stat = "X";
 
                     TableRow tr = new TableRow(getApplicationContext());

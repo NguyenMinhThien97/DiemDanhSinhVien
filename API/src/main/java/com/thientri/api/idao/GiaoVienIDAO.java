@@ -13,7 +13,8 @@ public interface GiaoVienIDAO {
 	public List<Lich> xemLichDay(long maNguoiDung);
 	public List<ChiTietDiemDanh> xemChiTietDiemDanh(long maMonHoc, String ngayDiemDanh);
 	public String CheckDiemDanh(long maMonHoc, String ngayDiemDanh, long maSinhVien);
-	public boolean quetQRDiemDanh(long maSinhVien,long maGiaoVien, String matKhauGiaoVien);
+	public boolean quetQRDiemDanhLan1(long maSinhVien, long maGiaoVien, String matKhauGiaoVien) ;
+	public boolean quetQRDiemDanhLan2(long maSinhVien, long maGiaoVien, String matKhauGiaoVien);
 	public MonHocHienTai monHocHienTai(long maGiaoVien, String matKhau);
 	public List<MonHoc> getTenMonHoc(long maGiaoVien);
 	public List<String> getNgayHoc(long maGiaoVien, long maMonHoc);
@@ -21,4 +22,5 @@ public interface GiaoVienIDAO {
 	public boolean taoListChiTietDiemDanh(long maGiaoVien, long maMonHoc);
 	public List<SinhVien> getThongTinSinhVien(long maMonHoc);
 	public String getEmailGV(long maGiaoVien);
+	public int getStatusChiTietDiemDanh(long maSinhVien,long maGiaoVien);
 }

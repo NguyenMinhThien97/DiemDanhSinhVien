@@ -84,7 +84,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".65"
-                    android:text="CNTT-KTMT"
                     android:textColor="#040750"
                     android:textSize="20dp" />
 
@@ -110,7 +109,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".65"
-                    android:text="Kiến trúc máy tính"
                     android:textColor="#040750"
                     android:textSize="20dp" />
 
@@ -136,7 +134,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".65"
-                    android:text="H6.03"
                     android:textColor="#040750"
                     android:textSize="20dp" />
 
@@ -162,7 +159,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".2"
-                    android:text="6:30PM"
                     android:textColor="#040750"
                     android:textSize="20dp" />
 
@@ -182,7 +178,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".2"
-                    android:text="8:30PM"
                     android:textColor="#040750"
                     android:textSize="20dp" />
 

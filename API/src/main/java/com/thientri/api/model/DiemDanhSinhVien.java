@@ -3,9 +3,10 @@ package com.thientri.api.model;
 public class DiemDanhSinhVien {
 	private String ngayDiemDanh;
 	
-	private boolean status;
+	private int status;
 
-	public DiemDanhSinhVien(String ngayDiemDanh, boolean status) {
+	public DiemDanhSinhVien(String ngayDiemDanh, int status) {
+		super();
 		this.ngayDiemDanh = ngayDiemDanh;
 		this.status = status;
 	}
@@ -18,11 +19,11 @@ public class DiemDanhSinhVien {
 		this.ngayDiemDanh = ngayDiemDanh;
 	}
 
-	public boolean isStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -87,7 +88,7 @@ public class GiaoVienDAO implements GiaoVienIDAO{
 				
 				String lyDoNghi = rs.getString("lydonghi");
 				
-				boolean status = rs.getBoolean("status");
+				int status = rs.getInt("status");
 				ChiTietDiemDanh c = new  ChiTietDiemDanh(maSinhVien, tenSinhVien, tenLop, hinh, gioitinh, ngayDiemDanh, lyDoNghi, status);
 				list.add(c);
 			}
@@ -122,30 +123,52 @@ public class GiaoVienDAO implements GiaoVienIDAO{
 		return tenSinhVien;
 	}
 	
-	public boolean quetQRDiemDanh(long maSinhVien, long maGiaoVien, String matKhauGiaoVien) {
+	public boolean quetQRDiemDanhLan1(long maSinhVien, long maGiaoVien, String matKhauGiaoVien) {
 		// lấy mã diem danh của môn học hiện tại
 		long madiemdanh = getMaDiemdanh(maSinhVien, maGiaoVien, matKhauGiaoVien);
-		if(madiemdanh != 0) {
+		int n = 0;
+		if(madiemdanh != 0 && checkQuetMaLan1(maGiaoVien, matKhauGiaoVien) == true) {
 			// Ngày hiện tại
 			LocalDate now = LocalDate.now();
-			Date date = java.sql.Date.valueOf(now);
-			// them du lieu vao ban chi tiet diem danh 
 			PreparedStatement smt = null;
-			int n = 0;
 			try {
 				Connection con = app.getConnection();
-				String sql = "INSERT INTO chitietdiemdanh (madiemdanh,ngaydiemdanh,status) values (?,?,?)";
+				String sql = "UPDATE chitietdiemdanh c, diemdanh d set c.status = 2 WHERE d.madiemdanh = c.madiemdanh AND d.magiaovien = ? AND d.masinhvien = ? AND c.ngaydiemdanh = ? AND d.madiemdanh=?";
 				smt = con.prepareStatement(sql);
-				smt.setLong(1, madiemdanh);
-				smt.setDate(2, (java.sql.Date) date);
-				smt.setBoolean(3, true);
+				smt.setLong(1, maGiaoVien);
+				smt.setLong(2, maSinhVien);
+				smt.setString(3, now.toString());
+				smt.setLong(4, madiemdanh);
 				n = smt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			return n>0;
 		}
-		return false;
+		return n>0;
+	}
+	
+	public boolean quetQRDiemDanhLan2(long maSinhVien, long maGiaoVien, String matKhauGiaoVien) {
+		// lấy mã diem danh của môn học hiện tại
+		long madiemdanh = getMaDiemdanh(maSinhVien, maGiaoVien, matKhauGiaoVien);
+		int n = 0;
+		if(madiemdanh != 0 && checkQuetMaLan2(maGiaoVien, matKhauGiaoVien) == true) {
+			// Ngày hiện tại
+			LocalDate now = LocalDate.now();
+			PreparedStatement smt = null;
+			try {
+				Connection con = app.getConnection();
+				String sql = "UPDATE chitietdiemdanh c, diemdanh d set c.status = 1 WHERE d.madiemdanh = c.madiemdanh AND d.magiaovien = ? AND d.masinhvien = ? AND c.ngaydiemdanh = ? AND d.madiemdanh=?";
+				smt = con.prepareStatement(sql);
+				smt.setLong(1, maGiaoVien);
+				smt.setLong(2, maSinhVien);
+				smt.setString(3, now.toString());
+				smt.setLong(4, madiemdanh);
+				n = smt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return n>0;
 		
 	}
 	
@@ -174,6 +197,63 @@ public class GiaoVienDAO implements GiaoVienIDAO{
 			return madiemdanh;
 		}
 		return 0;
+	}
+	
+	public boolean checkQuetMaLan1(long maGiaoVien, String matKhau) {
+		MonHocHienTai monHoc = monHocHienTai(maGiaoVien, matKhau);
+		// lay thu cua ngay hien tai
+		Calendar calendar = Calendar.getInstance();
+		int thu = calendar.get(Calendar.DAY_OF_WEEK);
+		Date d = new Date();
+		Date ngayBatDau;
+//		try {
+//			ngayBatDau = new SimpleDateFormat("yyyy-MM-dd").parse(monHoc.getNgayBatDau());
+//			Date ngayKetThuc = new SimpleDateFormat("yyyy-MM-dd").parse(monHoc.getNgayKetThuc());
+//			if(d.after(ngayBatDau) && d.before(ngayKetThuc)){
+				LocalTime now = LocalTime.now();
+				LocalTime timeStart = LocalTime.parse(monHoc.getGioBatDau());
+				LocalTime timeEnd = LocalTime.parse(monHoc.getGioKetThuc());
+				// hiển thị môn học hiện tại trước 10 phút đầu giờ và sau 10 phút cuối giờ
+				if(now.isAfter(timeStart.minusMinutes(10)) && now.isBefore(timeStart.plusMinutes(10))) {
+					return true;
+				}
+//			}
+			
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		return false;
+	}
+	
+	
+	public boolean checkQuetMaLan2(long maGiaoVien, String matKhau) {
+		MonHocHienTai monHoc = monHocHienTai(maGiaoVien, matKhau);
+		// lay thu cua ngay hien tai
+		Calendar calendar = Calendar.getInstance();
+		int thu = calendar.get(Calendar.DAY_OF_WEEK);
+//		Date d = new Date();
+//		Date ngayBatDau;
+//		try {
+//			ngayBatDau = new SimpleDateFormat("yyyy-MM-dd").parse(monHoc.getNgayBatDau());
+//			Date ngayKetThuc = new SimpleDateFormat("yyyy-MM-dd").parse(monHoc.getNgayKetThuc());
+//			if(d.after(ngayBatDau) && d.before(ngayKetThuc)){
+				LocalTime now = LocalTime.now();
+				LocalTime timeStart = LocalTime.parse(monHoc.getGioBatDau());
+				LocalTime timeEnd = LocalTime.parse(monHoc.getGioKetThuc());
+				// hiển thị môn học hiện tại trước 10 phút đầu giờ và sau 10 phút cuối giờ
+				if(now.isAfter(timeEnd.minusMinutes(10))) {
+					return true;
+				}
+//			}
+			
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		return false;
 	}
 	
 	public MonHocHienTai monHocHienTai(long maGiaoVien, String matKhau) {
@@ -246,50 +326,76 @@ public class GiaoVienDAO implements GiaoVienIDAO{
 		return listMonHoc;
 	}
 
+//	public List<String> getNgayHoc(long maGiaoVien, long maMonHoc) {
+//		PreparedStatement smt = null;
+//		List<String> list = new ArrayList<String>();
+//		String ngaybatdau = null;
+//		String ngayketthuc = null;
+//		String thu = null;
+//		try {
+//			Connection con = app.getConnection();
+//			String sql = "SELECT m.ngaybatdau, m.ngayketthuc,c.thu FROM monhoc m , nguoidung n, cahoc c WHERE m.magiaovien = n.ma AND n.status = 1 AND m.mamonhoc = c.macahoc AND n.ma = ? AND m.mamonhoc = ?";
+//			smt = con.prepareStatement(sql);
+//			smt.setLong(1, maGiaoVien);
+//			smt.setLong(2, maMonHoc);
+//			ResultSet rs= smt.executeQuery();
+//			while(rs.next()) {
+//				ngaybatdau = rs.getString("ngaybatdau");
+//				ngayketthuc = rs.getString("ngayketthuc");
+//				thu = rs.getString("thu");
+//			}
+//			
+//
+//			DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//			
+//			LocalDate start = LocalDate.parse(ngaybatdau);
+//			LocalDate end = LocalDate.parse(ngayketthuc);
+//			Calendar calendar = Calendar.getInstance();
+//
+//
+//			Date  ngayBatDau = simpleDateFormat.parse(ngaybatdau);
+//			Date  ngayKetThuc = simpleDateFormat.parse(ngayketthuc);
+//
+//			long getDiff = ngayKetThuc.getTime() - ngayBatDau.getTime();
+//
+//			long getDaysDiff = getDiff / (24 * 60 * 60 * 1000);
+//			for (long i = 0; i < getDaysDiff; i++) {
+//				
+//				start=start.plusDays(1);
+//				Date ngay = simpleDateFormat.parse(start.toString());
+//		        calendar.setTime(ngay);
+//		        String thuOfDay =calendar.get(Calendar.DAY_OF_WEEK)+"";
+//				if(thuOfDay.trim().equals(thu)) {
+//					list.add(start.toString());
+//				}
+//			}
+//		
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return list;
+//	}
+	
 	public List<String> getNgayHoc(long maGiaoVien, long maMonHoc) {
 		PreparedStatement smt = null;
 		List<String> list = new ArrayList<String>();
-		String ngaybatdau = null;
-		String ngayketthuc = null;
+		String ngayDiemDanh = null;
+		Date ngaydiemdanh = null;
 		String thu = null;
+		DateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		try {
 			Connection con = app.getConnection();
-			String sql = "SELECT m.ngaybatdau, m.ngayketthuc,c.thu FROM monhoc m , nguoidung n, cahoc c WHERE m.magiaovien = n.ma AND n.status = 1 AND m.mamonhoc = c.macahoc AND n.ma = ? AND m.mamonhoc = ?";
+			String sql = "SELECT DISTINCT c.ngaydiemdanh FROM diemdanh d, chitietdiemdanh c WHERE d.madiemdanh = c.madiemdanh AND d.magiaovien = ? AND d.mamonhoc = ?";
 			smt = con.prepareStatement(sql);
 			smt.setLong(1, maGiaoVien);
 			smt.setLong(2, maMonHoc);
 			ResultSet rs= smt.executeQuery();
 			while(rs.next()) {
-				ngaybatdau = rs.getString("ngaybatdau");
-				ngayketthuc = rs.getString("ngayketthuc");
-				thu = rs.getString("thu");
+				ngaydiemdanh = rs.getDate("ngaydiemdanh");
+				ngayDiemDanh = simpleDateFormat.format(ngaydiemdanh);
+				list.add(ngayDiemDanh);
 			}
-			
-
-			DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			
-			LocalDate start = LocalDate.parse(ngaybatdau);
-			LocalDate end = LocalDate.parse(ngayketthuc);
-			Calendar calendar = Calendar.getInstance();
-
-
-			Date  ngayBatDau = simpleDateFormat.parse(ngaybatdau);
-			Date  ngayKetThuc = simpleDateFormat.parse(ngayketthuc);
-
-			long getDiff = ngayKetThuc.getTime() - ngayBatDau.getTime();
-
-			long getDaysDiff = getDiff / (24 * 60 * 60 * 1000);
-			for (long i = 0; i < getDaysDiff; i++) {
-				
-				start=start.plusDays(1);
-				Date ngay = simpleDateFormat.parse(start.toString());
-		        calendar.setTime(ngay);
-		        String thuOfDay =calendar.get(Calendar.DAY_OF_WEEK)+"";
-				if(thuOfDay.trim().equals(thu)) {
-					list.add(start.toString());
-				}
-			}
-		
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -404,5 +510,26 @@ public String getEmailGV(long maGiaoVien) {
 		}
 		return email;
 	}
+
+public int getStatusChiTietDiemDanh(long maSinhVien, long maGiaoVien) {
+	PreparedStatement smt = null;
+	int status = 0;
+	LocalDate now = LocalDate.now();
+	try {
+		Connection con = app.getConnection();
+		String sql = "SELECT c.status FROM diemdanh d ,chitietdiemdanh c WHERE d.madiemdanh =c.madiemdanh AND d.magiaovien= ? AND d.masinhvien = ? AND c.ngaydiemdanh =?";
+		smt = con.prepareStatement(sql);
+		smt.setLong(1, maGiaoVien);
+		smt.setLong(2, maSinhVien);
+		smt.setString(3, now.toString());
+		ResultSet rs= smt.executeQuery();
+		while(rs.next()) {
+			status = rs.getInt("status");
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return status;
+}
 
 }

@@ -20,10 +20,10 @@ public class ChiTietDiemDanh implements Serializable{
 	
 	private String lyDoNghi;
 	
-	private boolean status;
+	private int status;
 
 	public ChiTietDiemDanh(long maSinhVien, String tenSinhVien, String tenLop, String hinh, String gioitinh,
-			String ngayDiemDanh, String lyDoNghi, boolean status) {
+			String ngayDiemDanh, String lyDoNghi, int status) {
 		super();
 		this.maSinhVien = maSinhVien;
 		this.tenSinhVien = tenSinhVien;
@@ -91,12 +91,17 @@ public class ChiTietDiemDanh implements Serializable{
 		this.lyDoNghi = lyDoNghi;
 	}
 
-	public boolean isStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	
 }

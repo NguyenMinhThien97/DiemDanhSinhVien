@@ -8,10 +8,9 @@ public class FileChiTietDiemDanh {
 	
 	private String lyDoNghi;
 	
-	private boolean status;
+	private int status;
 
-
-	public FileChiTietDiemDanh(long maSinhVien, String ngayDiemDanh, String lyDoNghi, boolean status) {
+	public FileChiTietDiemDanh(long maSinhVien, String ngayDiemDanh, String lyDoNghi, int status) {
 		super();
 		this.maSinhVien = maSinhVien;
 		this.ngayDiemDanh = ngayDiemDanh;
@@ -43,11 +42,11 @@ public class FileChiTietDiemDanh {
 		this.lyDoNghi = lyDoNghi;
 	}
 
-	public boolean isStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 }

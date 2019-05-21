@@ -125,8 +125,11 @@ public class ChiTietDiemDanh extends AppCompatActivity {
                     mamonhoc = spinnermonhoc.getSelectedItem().toString();
                     mamonhoc = ((String) mamonhoc).substring(0, ((String) mamonhoc).indexOf("."));
 
+                    String[] output = spinnerngay.getSelectedItem().toString().split("-");
+                    String t = output[0]+output[1]+output[2];
+
                     urldiemdanh = MethodChung.CreateURL() + "/giaovien/xemChiTietDiemDanh/"
-                            + mamonhoc + "/" + spinnerngay.getSelectedItem().toString();
+                            + mamonhoc + "/" + t;
                     new HttpAsyncTaskDiemDanh().execute(urldiemdanh);
 
                     btnin.setVisibility(View.VISIBLE);
@@ -144,7 +147,7 @@ public class ChiTietDiemDanh extends AppCompatActivity {
                 mamonhoc = ((String) mamonhoc).substring(0, ((String) mamonhoc).indexOf("."));
 
                 urlexcel = MethodChung.CreateURL() + "giaovien/fileChiTietDiemDanh/"
-                        + manhanduoc +"/" + mamonhoc;
+                        + manhanduoc + "/" + mamonhoc;
                 new HttpAsyncTaskExcel().execute(urlexcel);
             }
         });
@@ -208,7 +211,6 @@ public class ChiTietDiemDanh extends AppCompatActivity {
                 JSONArray array = new JSONArray(result);
                 for (int i = 0; i < array.length(); i++) {
                     String ngay = array.get(i).toString();
-
                     listngayhoc.add(ngay);
                 }
 
@@ -251,14 +253,19 @@ public class ChiTietDiemDanh extends AppCompatActivity {
                     JSONObject obj = array.getJSONObject(i);
                     String ten = obj.getString("tenSinhVien");
                     String ma = obj.getString("maSinhVien");
+                    String stat = obj.getString("status");
+
+                    if (stat.equals("1")) {
+                        stat = "V";
+                    } else if (stat.equals("0"))
+                        stat = "X";
 
                     TableRow tr = new TableRow(getApplicationContext());
                     TextView txtTen = new TextView(getApplicationContext());
                     TextView txtMa = new TextView(getApplicationContext());
-                    LinearLayout ln = new LinearLayout(getApplicationContext());
-                    CheckBox cb = new CheckBox(getApplicationContext());
+                    TextView txtStat = new TextView(getApplicationContext());
 
-                    CreateRow(tr, txtTen, ten, txtMa, ma, ln, cb);
+                    CreateRow(tr, txtTen, ten, txtMa, ma, txtStat, stat);
                 }
 
             } catch (JSONException e) {
@@ -268,7 +275,7 @@ public class ChiTietDiemDanh extends AppCompatActivity {
         }
 
         //Hàm tạo Row điểm danh
-        private void CreateRow(TableRow tr, TextView txtTen, String ten, TextView txtMa, String ma, LinearLayout ln, CheckBox cb) {
+        private void CreateRow(TableRow tr, TextView txtTen, String ten, TextView txtMa, String ma, TextView txtStat, String stat) {
 
             TableLayout tbl = findViewById(R.id.tableLichHoc);
 
@@ -292,20 +299,18 @@ public class ChiTietDiemDanh extends AppCompatActivity {
             txtMa.setTextColor(Color.parseColor("#040750"));
             txtMa.setTextSize(12);
 
-            ln.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
-            ln.setBackground(getDrawable(R.drawable.row_xem_lich_white));
-            ln.setGravity(Gravity.CENTER);
-
-            cb.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-            cb.setText(null);
+            txtStat.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+            txtStat.setBackground(getDrawable(R.drawable.row_xem_lich_white));
+            txtStat.setPadding(10, 10, 10, 10);
+            txtStat.setText(stat);
+            txtStat.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
+            txtStat.setTextColor(Color.parseColor("#040750"));
+            txtStat.setTextSize(12);
 
 
             tr.addView(txtTen);
             tr.addView(txtMa);
-
-            ln.addView(cb);
-
-            tr.addView(ln);
+            tr.addView(txtStat);
 
             tbl.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
         }

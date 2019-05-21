@@ -199,7 +199,6 @@ public class ThongTinGiaoVien extends AppCompatActivity {
             TextView txtgiobd = findViewById(R.id.txtViewGioBatDauGV);
             TextView txtgiokt = findViewById(R.id.txtViewGioKetThucGV);
 
-            Toast.makeText(ThongTinGiaoVien.this, "Try", Toast.LENGTH_SHORT).show();
 
             try {
                 JSONObject jsonObj = new JSONObject(result); // convert String to JSONObject
@@ -210,8 +209,6 @@ public class ThongTinGiaoVien extends AppCompatActivity {
                 tenphong = jsonObj.getString("tenPhongHoc");
                 giobd = jsonObj.getString("gioBatDau");
                 giokt = jsonObj.getString("gioKetThuc");
-
-                Toast.makeText(ThongTinGiaoVien.this, "something: " + giobd, Toast.LENGTH_SHORT).show();
 
                 txtmagv.setText(mamon);
                 txttengv.setText(tenmon);

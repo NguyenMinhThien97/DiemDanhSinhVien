@@ -70,19 +70,32 @@ public class GiaoVienController {
 		return giaoVienIDAO.xemLichDay(magiaovien);
 	}
 
-	// ngày điểm danh set theo định dạng 2019-04-28 { yyyy-MM-dd }
+	// ngày điểm danh set theo định dạng 2019-04-28 { yyyyMMdd }
 	@GetMapping(value = "/xemChiTietDiemDanh/{maMonHoc}/{ngayDiemDanh}", produces = "application/json;charset=UTF-8")
 	public List<ChiTietDiemDanh> xemChiTietDiemDanh(@PathVariable("maMonHoc") long maMonHoc,
 			@PathVariable("ngayDiemDanh") String ngayDiemDanh) {
-		return giaoVienIDAO.xemChiTietDiemDanh(maMonHoc, ngayDiemDanh);
+		String ngay =ngayDiemDanh.substring(0, 2);
+		String thang =ngayDiemDanh.substring(2, 4);
+		String nam = ngayDiemDanh.substring(4,8);
+		String ngayBD = nam+"-"+thang+"-"+ngay;
+		
+		return giaoVienIDAO.xemChiTietDiemDanh(maMonHoc, ngayBD);
 	}
 
 	
 	//Phần này sai cần check 2 lần nên cần 1 table temp check lần 1, check lần 2 sẽ update vao bang chi tiet diem danh
 	@GetMapping(value = "/quetQRDiemDanh/{maSinhVien}/{maGiaoVien}/{matKhauGiaoVien}", produces = "application/json;charset=UTF-8")
-	public boolean quetQRDiemDanh(@PathVariable("maSinhVien") long maSinhVien,
-			@PathVariable("maGiaoVien") long maGiaoVien, @PathVariable("matKhauGiaoVien") String matKhauGiaoVien) {
-		return giaoVienIDAO.quetQRDiemDanh(maSinhVien, maGiaoVien, matKhauGiaoVien);
+	public boolean quetQRDiemDanh(@PathVariable("maSinhVien") long maSinhVien,@PathVariable("maGiaoVien") long maGiaoVien, @PathVariable("matKhauGiaoVien") String matKhauGiaoVien) {
+		int status = giaoVienIDAO.getStatusChiTietDiemDanh(maSinhVien, maGiaoVien);
+		//quet lan dau
+		if(status == 0) {
+			System.out.println(status);
+			return giaoVienIDAO.quetQRDiemDanhLan1(maSinhVien, maGiaoVien, matKhauGiaoVien);
+		}
+		else if (status ==2) {
+			return giaoVienIDAO.quetQRDiemDanhLan2(maSinhVien, maGiaoVien, matKhauGiaoVien);
+		}
+		return false;
 	}
 
 	@GetMapping(value = "/monHocHienTai/{maGiaoVien}/{matKhau}", produces = "application/json;charset=UTF-8")
@@ -175,7 +188,14 @@ public class GiaoVienController {
             for (int i = 0; i < listNgayHoc.size(); i++) {
             	int cell_N = 4+i;
             	cell = row.createCell(cell_N, CellType.STRING);	
-            	String checkDiemDanh = giaoVienIDAO.CheckDiemDanh(maMonHoc, listNgayHoc.get(i),c.getMaSinhVien());
+            	//Ngay nhận 20-05-2019
+            	String ngay =listNgayHoc.get(i).substring(0, 2);
+        		String thang =listNgayHoc.get(i).substring(3, 5);
+        		String nam = listNgayHoc.get(i).substring(6,10);
+        		String ngayHoc = nam+"-"+thang+"-"+ngay;
+        		//2019-05-20
+//        		System.out.println(ngayHoc);
+            	String checkDiemDanh = giaoVienIDAO.CheckDiemDanh(maMonHoc, ngayHoc,c.getMaSinhVien());
     			if(checkDiemDanh == null) {
     				cell.setCellValue("Không");
     			}else {
