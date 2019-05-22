@@ -27,11 +27,11 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class ThongTinSinhVien extends AppCompatActivity {
 
-    String manhanduoc, passnhanduoc;
+    private String manhanduoc, passnhanduoc;
 
-    String ma, ten, hinh, ngaysinh, gioitinh, sdt, email, tenlop, trinhdo, chucvu, tenkhoa, pass;
+    private String ma, ten, hinh, ngaysinh, gioitinh, sdt, email, tenlop, trinhdo, chucvu, tenkhoa, pass;
 
-    String mamon, tenmon, ngaybd, ngaykt, tenphong, giobd, giokt;
+    private String mamon, tenmon, ngaybd, ngaykt, tenphong, giobd, giokt;
 
     ProgressDialog progressDialog;
     DrawerLayout drawerLayout;
@@ -75,7 +75,7 @@ public class ThongTinSinhVien extends AppCompatActivity {
 
 //        // Hiện progress bar
 //        progressDialog = new ProgressDialog(ThongTinSinhVien.this);
-//        progressDialog.setMessage("Loading..."); // Setting Message
+//        progressDialog.setMessage("Đang chạy ..."); // Setting Message
 //        progressDialog.setTitle("Đang kiểm tra ~"); // Setting Title
 //        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
 //        progressDialog.show(); // Display Progress Dialog
@@ -136,6 +136,8 @@ public class ThongTinSinhVien extends AppCompatActivity {
                 break;
             case R.id.dangXuat:
                 Intent intentb3 = new Intent(ThongTinSinhVien.this, MainActivity.class);
+                intentb3.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intentb3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intentb3);
                 break;
             default:

@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 
 public class MethodChung {
     public static String CreateURL() {
-        return "http://192.168.43.21:8899/";
+        return "http://192.168.1.4:8899/";
     }
 
 //    public static String CreateURL(){
@@ -40,7 +40,7 @@ public class MethodChung {
             if (inputStream != null)
                 result = convertInputStreamToString(inputStream);
             else
-                result = "Did not work!";
+                result = "Did not work ...";
 
         } catch (Exception e) {
             Log.d("InputStream", e.getLocalizedMessage());

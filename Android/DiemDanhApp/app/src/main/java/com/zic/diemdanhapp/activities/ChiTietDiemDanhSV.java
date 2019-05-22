@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class ChiTietDiemDanhSV extends AppCompatActivity {
 
-    String manhanduoc, status, urlmonhoc, urldiemdanh, mamonhoc;
+    private String manhanduoc, status, urlmonhoc, urldiemdanh, mamonhoc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

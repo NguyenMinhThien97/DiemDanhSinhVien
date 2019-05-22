@@ -31,11 +31,11 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class ThongTinGiaoVien extends AppCompatActivity {
 
-    String manhanduoc, passnhanduoc;
+    private String manhanduoc, passnhanduoc;
 
-    String ma, ten, hinh, ngaysinh, gioitinh, trinhdo, chucvu, tenkhoa, pass;
+    private String ma, ten, hinh, ngaysinh, gioitinh, trinhdo, chucvu, tenkhoa, pass;
 
-    String mamon, tenmon, ngaybd, ngaykt, tenphong, giobd, giokt;
+    private String mamon, tenmon, ngaybd, ngaykt, tenphong, giobd, giokt;
 
 //    ProgressDialog progressDialog;
 
@@ -117,6 +117,8 @@ public class ThongTinGiaoVien extends AppCompatActivity {
                 break;
             case R.id.dangXuat:
                 Intent intentb3 = new Intent(ThongTinGiaoVien.this, MainActivity.class);
+                intentb3.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intentb3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intentb3);
                 break;
             default:

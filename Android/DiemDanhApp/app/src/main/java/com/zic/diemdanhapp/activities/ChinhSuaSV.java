@@ -19,8 +19,8 @@ import android.widget.Toast;
 
 public class ChinhSuaSV extends AppCompatActivity {
 
-    EditText etResponse;
-    TextView tvIsConnected;
+    private EditText etResponse;
+    private TextView tvIsConnected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -9,38 +9,6 @@
     android:background="@drawable/plain_border"
     tools:context=".activities.ForgetPass">
 
-    <EditText
-        android:id="@+id/editSDT"
-        android:layout_width="0dp"
-        android:layout_height="100px"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="340dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/plain_border"
-        android:ems="10"
-        android:hint="      SĐT"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editEmail"
-        android:layout_width="0dp"
-        android:layout_height="100px"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="340dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/plain_border"
-        android:ems="10"
-        android:hint="      Email"
-        android:inputType="textEmailAddress|textEmailSubject"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/txtvDDSV3"
         android:layout_width="0dp"
@@ -78,41 +46,6 @@
         app:srcCompat="@drawable/logo_iuh"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/LabelMK"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="416dp"
-        android:layout_marginEnd="8dp"
-        android:hint="Mật khẩu : "
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.032"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/editPassForget"
-        android:layout_width="220dp"
-        android:layout_height="100px"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="408dp"
-        android:layout_marginEnd="8dp"
-        android:background="#cde0ed"
-        android:hint="Mật khẩu"
-        android:inputType="textPersonName"
-        android:padding="10px"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.946"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/btnTiep"
         android:layout_width="152dp"
@@ -145,47 +78,37 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/txtForget"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="236dp"
-        android:layout_marginEnd="8dp"
-        android:text="Xin mời chọn hình thức lấy lại mật khẩu"
-        android:textAlignment="center"
-        android:textColor="#040750"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/spinForget"
+    <EditText
+        android:id="@+id/editMa"
         android:layout_width="0dp"
         android:layout_height="100px"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="268dp"
+        android:layout_marginTop="184dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/plain_border"
+        android:drawableLeft="@drawable/icons_person"
+        android:ems="10"
+        android:hint="      Mã tài khoản"
+        android:inputType="number"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editMa"
+        android:id="@+id/editEmail"
         android:layout_width="0dp"
         android:layout_height="100px"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="156dp"
+        android:layout_marginTop="256dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/plain_border"
+        android:drawableLeft="@drawable/email"
         android:ems="10"
-        android:hint="      Nhập mã SV/GV"
-        android:inputType="number"
+        android:hint="      Email"
+        android:inputType="textEmailAddress|textEmailSubject"
+        android:paddingLeft="10px"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

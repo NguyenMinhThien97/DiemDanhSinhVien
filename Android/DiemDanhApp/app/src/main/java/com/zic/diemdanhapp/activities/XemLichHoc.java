@@ -30,11 +30,11 @@ import org.w3c.dom.Text;
 
 public class XemLichHoc extends AppCompatActivity {
 
-    String ma, status, urlxemlichhoc;
+    private String ma, status, urlxemlichhoc;
 
-    String monhoc;
+    private String monhoc;
 
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

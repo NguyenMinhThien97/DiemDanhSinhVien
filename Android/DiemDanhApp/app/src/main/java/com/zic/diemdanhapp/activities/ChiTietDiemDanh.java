@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class ChiTietDiemDanh extends AppCompatActivity {
 
-    String manhanduoc, status, urlmonhoc, urlngayhoc, urldiemdanh, mamonhoc, urlexcel;
+    private String manhanduoc, status, urlmonhoc, urlngayhoc, urldiemdanh, mamonhoc, urlexcel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -343,7 +343,7 @@ public class ChiTietDiemDanh extends AppCompatActivity {
             if (result.equals(t)) {
                 Toast.makeText(getApplicationContext(), "Đã gửi file thành công ~", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getApplicationContext(), "Gửi file không thành công", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Gửi file không thành công ...", Toast.LENGTH_SHORT).show();
             }
 
         }

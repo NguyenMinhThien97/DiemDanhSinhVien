@@ -21,7 +21,7 @@ public class QuetMaQR extends AppCompatActivity implements ZXingScannerView.Resu
 
     private ZXingScannerView zXingScannerView;
 
-    String manhanduoc, status, pass, urlqr;
+    private String manhanduoc, status, pass, urlqr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,9 +83,9 @@ public class QuetMaQR extends AppCompatActivity implements ZXingScannerView.Resu
         protected void onPostExecute(String result) {
             String t = "true";
             if (result.equals(t)) {
-                Toast.makeText(getApplicationContext(), "Đã điểm danh", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Đã điểm danh ~", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getApplicationContext(), "Mã không đúng\n Hãy thử lại!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Mã không đúng ... \n Thử lại nào!", Toast.LENGTH_SHORT).show();
             }
 
         }
