@@ -90,7 +90,6 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="56dp"
-        android:checked="false"
         android:text="Nhớ tài khoản"
         app:layout_constraintBottom_toTopOf="@+id/btnLogin"
         app:layout_constraintEnd_toEndOf="parent"

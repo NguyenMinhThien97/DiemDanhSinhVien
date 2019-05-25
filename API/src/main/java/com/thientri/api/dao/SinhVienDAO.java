@@ -236,6 +236,26 @@ public class SinhVienDAO implements SinhVienIDAO{
 		}
 		return list;
 	}
+	public int getStatusChiTietDiemDanh(long maSinhVien) {
+		PreparedStatement smt = null;
+		int status = 0;
+		LocalDate now = LocalDate.now();
+		try {
+			Connection con = app.getConnection();
+			String sql = "SELECT c.status FROM diemdanh d , chitietdiemdanh c WHERE d.madiemdanh = c.madiemdanh AND d.masinhvien = ? AND c.ngaydiemdanh = ? ";
+			smt = con.prepareStatement(sql);
+			smt.setLong(1, maSinhVien);
+			smt.setString(2, now.toString());
+			ResultSet rs= smt.executeQuery();
+			while(rs.next()) {
+				status = rs.getInt("status");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return status;
+	}
+	
 //	public List<String> getNgayHoc(long maSinhVien, long maMonHoc) {
 //		PreparedStatement smt = null;
 //		List<String> list = new ArrayList<String>();
@@ -287,53 +307,98 @@ public class SinhVienDAO implements SinhVienIDAO{
 //		return list;
 //	}
 
-//	public boolean quetQRDiemDanhLan1(String tenPhongHoc, long maSinhVien, String matKhau) {
-//		// lấy mã diem danh của môn học hiện tại
-//		long madiemdanh = getMaDiemdanh(maSinhVien, maGiaoVien, matKhauGiaoVien);
-//		int n = 0;
-//		if(madiemdanh != 0 && checkQuetMaLan1(maGiaoVien, matKhauGiaoVien) == true) {
-//			// Ngày hiện tại
-//			LocalDate now = LocalDate.now();
-//			PreparedStatement smt = null;
-//			try {
-//				Connection con = app.getConnection();
-//				String sql = "UPDATE chitietdiemdanh c, diemdanh d set c.status = 2 WHERE d.madiemdanh = c.madiemdanh AND d.magiaovien = ? AND d.masinhvien = ? AND c.ngaydiemdanh = ? AND d.madiemdanh=?";
-//				smt = con.prepareStatement(sql);
-//				smt.setLong(1, maGiaoVien);
-//				smt.setLong(2, maSinhVien);
-//				smt.setString(3, now.toString());
-//				smt.setLong(4, madiemdanh);
-//				n = smt.executeUpdate();
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		return n>0;
-//		
-//	}
-//	
-//	public boolean quetQRDiemDanhLan2(long maSinhVien, long maGiaoVien, String matKhauGiaoVien) {
-//		// lấy mã diem danh của môn học hiện tại
-//		long madiemdanh = getMaDiemdanh(maSinhVien, maGiaoVien, matKhauGiaoVien);
-//		int n = 0;
-//		if(madiemdanh != 0 && checkQuetMaLan2(maGiaoVien, matKhauGiaoVien) == true) {
-//			// Ngày hiện tại
-//			LocalDate now = LocalDate.now();
-//			PreparedStatement smt = null;
-//			try {
-//				Connection con = app.getConnection();
-//				String sql = "UPDATE chitietdiemdanh c, diemdanh d set c.status = 1 WHERE d.madiemdanh = c.madiemdanh AND d.magiaovien = ? AND d.masinhvien = ? AND c.ngaydiemdanh = ? AND d.madiemdanh=?";
-//				smt = con.prepareStatement(sql);
-//				smt.setLong(1, maGiaoVien);
-//				smt.setLong(2, maSinhVien);
-//				smt.setString(3, now.toString());
-//				smt.setLong(4, madiemdanh);
-//				n = smt.executeUpdate();
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		return n>0;
-//		
-//	}
+	public boolean quetQRDiemDanhLan1(String tenPhongHoc, long maSinhVien, String matKhau) {
+		// lấy mã diem danh của môn học hiện tại
+		long madiemdanh = getMaDiemdanh(maSinhVien, matKhau);
+		int n = 0;
+		if(madiemdanh != 0 && checkQuetMaLan1(maSinhVien, matKhau) == true) {
+			// Ngày hiện tại
+			LocalDate now = LocalDate.now();
+			PreparedStatement smt = null;
+			try {
+				Connection con = app.getConnection();
+				String sql = "UPDATE chitietdiemdanh c, diemdanh d set c.status = 2 WHERE d.madiemdanh = c.madiemdanh AND d.masinhvien = ? AND c.ngaydiemdanh = ? AND d.madiemdanh = ?";
+				smt = con.prepareStatement(sql);
+				smt.setLong(1, maSinhVien);
+				smt.setString(2, now.toString());
+				smt.setLong(3, madiemdanh);
+				n = smt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return n>0;
+		
+	}
+	
+	public boolean quetQRDiemDanhLan2(String tenPhongHoc, long maSinhVien, String matKhau) {
+		// lấy mã diem danh của môn học hiện tại
+		long madiemdanh = getMaDiemdanh(maSinhVien, matKhau);
+		int n = 0;
+		if(madiemdanh != 0 && checkQuetMaLan2(maSinhVien, matKhau) == true) {
+			// Ngày hiện tại
+			LocalDate now = LocalDate.now();
+			PreparedStatement smt = null;
+			try {
+				Connection con = app.getConnection();
+				String sql = "UPDATE chitietdiemdanh c, diemdanh d set c.status = 1 WHERE d.madiemdanh = c.madiemdanh AND d.masinhvien = ? AND c.ngaydiemdanh = ? AND d.madiemdanh=?";
+				smt = con.prepareStatement(sql);
+				smt.setLong(1, maSinhVien);
+				smt.setString(2, now.toString());
+				smt.setLong(3, madiemdanh);
+				n = smt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return n>0;
+		
+	}
+	
+	// lấy mã diem danh của môn học hiện tại
+	public long getMaDiemdanh(long maSinhVien, String matKhau) {
+		MonHocHienTai monHocHienTai = monHocHienTai(maSinhVien, matKhau);
+		long madiemdanh = 0;
+		if(monHocHienTai != null) {
+			PreparedStatement smt = null;
+			try {
+				Connection con = app.getConnection();
+			String sql = "SELECT d.madiemdanh FROM diemdanh d WHERE d.masinhvien = ? AND d.mamonhoc = ?";
+			smt = con.prepareStatement(sql);
+			smt.setLong(1, maSinhVien);
+			smt.setLong(2, monHocHienTai.getMaMonHoc());
+			ResultSet rs= smt.executeQuery();
+				while(rs.next()) {
+					madiemdanh = rs.getLong("madiemdanh");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return madiemdanh;
+	}
+		
+	public boolean checkQuetMaLan1(long maSinhVien, String matKhau) {
+		MonHocHienTai monHoc = monHocHienTai(maSinhVien, matKhau);
+				LocalTime now = LocalTime.now();
+				LocalTime timeStart = LocalTime.parse(monHoc.getGioBatDau());
+				// hiển thị môn học hiện tại trước 10 phút đầu giờ và sau 10 phút cuối giờ
+				if(now.isAfter(timeStart.minusMinutes(10)) && now.isBefore(timeStart.plusMinutes(10))) {
+					return true;
+				}
+		return false;
+	}
+	
+	
+	public boolean checkQuetMaLan2(long maSinhVien, String matKhau) {
+		MonHocHienTai monHoc = monHocHienTai(maSinhVien, matKhau);
+				LocalTime now = LocalTime.now();
+				LocalTime timeEnd = LocalTime.parse(monHoc.getGioKetThuc());
+				// hiển thị môn học hiện tại trước 10 phút đầu giờ và sau 10 phút cuối giờ
+				if(now.isAfter(timeEnd.minusMinutes(10)) && now.isBefore(timeEnd.plusMinutes(10)) ) {
+					return true;
+				}
+		
+		return false;
+	}
 }

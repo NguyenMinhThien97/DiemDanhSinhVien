@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -101,7 +100,6 @@ public class GiaoVienDAO implements GiaoVienIDAO{
 	}
 
 	public String CheckDiemDanh(long maMonHoc, String ngayDiemDanh, long maSinhVien) {
-		ArrayList<FileChiTietDiemDanh> list = new ArrayList<FileChiTietDiemDanh>() ;
 		PreparedStatement smt = null;
 		String tenSinhVien = null ;
 		try {
@@ -201,57 +199,24 @@ public class GiaoVienDAO implements GiaoVienIDAO{
 	
 	public boolean checkQuetMaLan1(long maGiaoVien, String matKhau) {
 		MonHocHienTai monHoc = monHocHienTai(maGiaoVien, matKhau);
-		// lay thu cua ngay hien tai
-		Calendar calendar = Calendar.getInstance();
-		int thu = calendar.get(Calendar.DAY_OF_WEEK);
-		Date d = new Date();
-		Date ngayBatDau;
-//		try {
-//			ngayBatDau = new SimpleDateFormat("yyyy-MM-dd").parse(monHoc.getNgayBatDau());
-//			Date ngayKetThuc = new SimpleDateFormat("yyyy-MM-dd").parse(monHoc.getNgayKetThuc());
-//			if(d.after(ngayBatDau) && d.before(ngayKetThuc)){
 				LocalTime now = LocalTime.now();
 				LocalTime timeStart = LocalTime.parse(monHoc.getGioBatDau());
-				LocalTime timeEnd = LocalTime.parse(monHoc.getGioKetThuc());
 				// hiển thị môn học hiện tại trước 10 phút đầu giờ và sau 10 phút cuối giờ
 				if(now.isAfter(timeStart.minusMinutes(10)) && now.isBefore(timeStart.plusMinutes(10))) {
 					return true;
 				}
-//			}
-			
-//		} catch (ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
 		return false;
 	}
 	
 	
 	public boolean checkQuetMaLan2(long maGiaoVien, String matKhau) {
 		MonHocHienTai monHoc = monHocHienTai(maGiaoVien, matKhau);
-		// lay thu cua ngay hien tai
-		Calendar calendar = Calendar.getInstance();
-		int thu = calendar.get(Calendar.DAY_OF_WEEK);
-//		Date d = new Date();
-//		Date ngayBatDau;
-//		try {
-//			ngayBatDau = new SimpleDateFormat("yyyy-MM-dd").parse(monHoc.getNgayBatDau());
-//			Date ngayKetThuc = new SimpleDateFormat("yyyy-MM-dd").parse(monHoc.getNgayKetThuc());
-//			if(d.after(ngayBatDau) && d.before(ngayKetThuc)){
 				LocalTime now = LocalTime.now();
-				LocalTime timeStart = LocalTime.parse(monHoc.getGioBatDau());
 				LocalTime timeEnd = LocalTime.parse(monHoc.getGioKetThuc());
 				// hiển thị môn học hiện tại trước 10 phút đầu giờ và sau 10 phút cuối giờ
-				if(now.isAfter(timeEnd.minusMinutes(10))) {
+				if(now.isAfter(timeEnd.minusMinutes(10)) && now.isBefore(timeEnd.plusMinutes(10)) ) {
 					return true;
 				}
-//			}
-			
-//		} catch (ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		
 		return false;
 	}
@@ -382,11 +347,10 @@ public class GiaoVienDAO implements GiaoVienIDAO{
 		List<String> list = new ArrayList<String>();
 		String ngayDiemDanh = null;
 		Date ngaydiemdanh = null;
-		String thu = null;
 		DateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		try {
 			Connection con = app.getConnection();
-			String sql = "SELECT DISTINCT c.ngaydiemdanh FROM diemdanh d, chitietdiemdanh c WHERE d.madiemdanh = c.madiemdanh AND d.magiaovien = ? AND d.mamonhoc = ?";
+			String sql = "SELECT DISTINCT c.ngaydiemdanh FROM diemdanh d, chitietdiemdanh c WHERE d.madiemdanh = c.madiemdanh AND d.magiaovien = ? AND d.mamonhoc = ? ORDER BY c.ngaydiemdanh";
 			smt = con.prepareStatement(sql);
 			smt.setLong(1, maGiaoVien);
 			smt.setLong(2, maMonHoc);
@@ -405,7 +369,6 @@ public class GiaoVienDAO implements GiaoVienIDAO{
 
 	public boolean taoListChiTietDiemDanh(long maGiaoVien, long maMonHoc) {
 		PreparedStatement smt = null;
-		long maDiemDanh = 0;
 		int n=0;
 		long madiemdanh = getMaDiemDanh(maGiaoVien, maMonHoc);
 		List<String> ngayHoc = getNgayHoc(maGiaoVien, maMonHoc);

@@ -3,7 +3,6 @@ package com.thientri.api.idao;
 import java.util.List;
 
 import com.thientri.api.model.ChiTietDiemDanh;
-import com.thientri.api.model.FileChiTietDiemDanh;
 import com.thientri.api.model.Lich;
 import com.thientri.api.model.MonHoc;
 import com.thientri.api.model.MonHocHienTai;

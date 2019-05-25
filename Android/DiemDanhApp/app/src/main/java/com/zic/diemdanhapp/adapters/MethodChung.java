@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 
 public class MethodChung {
     public static String CreateURL() {
-        return "http://192.168.1.4:8899/";
+        return "http://192.168.1.5:8899/";
     }
 
 //    public static String CreateURL(){

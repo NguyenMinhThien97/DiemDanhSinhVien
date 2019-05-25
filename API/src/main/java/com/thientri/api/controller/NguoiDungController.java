@@ -33,14 +33,14 @@ public class NguoiDungController {
 		return nguoiDungIDAO.createNguoiDung(nguoiDung);
 	}
 	
-	@PostMapping(value="/update",produces = "application/json;charset=UTF-8")
-	public boolean update(@RequestBody NguoiDung nguoiDung) {
-		return nguoiDungIDAO.updateNguoiDung(nguoiDung);
+	@PostMapping(value="/update/{ma}/{matKhau}/{soDienThoai}/{email}",produces = "application/json;charset=UTF-8")
+	public boolean update(@PathVariable("ma") long ma,@PathVariable("matKhau") String matKhau,@PathVariable("soDienThoai") String soDienThoai,@PathVariable("email") String email) {
+		return nguoiDungIDAO.updateNguoiDung(ma, matKhau, soDienThoai, email);
 	}
 	
-	@GetMapping(value="/deleteByID/{id}",produces = "application/json;charset=UTF-8")
-	public boolean delete(@PathVariable("id") long id){
-		return nguoiDungIDAO.deleteNguoiDungById(id);
+	@GetMapping(value="/deleteByID/{ma}",produces = "application/json;charset=UTF-8")
+	public boolean delete(@PathVariable("ma") long ma){
+		return nguoiDungIDAO.deleteNguoiDungById(ma);
 	}
 	
 	@GetMapping(value="/findById/{maNguoiDung}",produces = "application/json;charset=UTF-8")
@@ -58,4 +58,16 @@ public class NguoiDungController {
 	public boolean doiMatKhau(@PathVariable("ma") long ma,@PathVariable("matkhaucu") String matkhaucu,@PathVariable("matkhaumoi") String matkhaumoi) {
 		return nguoiDungIDAO.doiMatKhau(ma,matkhaucu, matkhaumoi);
 	}
+	
+	@GetMapping(value="/quenMatKhau/{ma}/{email}",produces = "application/json;charset=UTF-8")
+	public boolean quenMatKhau(@PathVariable("ma") long ma,@PathVariable("email") String email) {
+		String gmail = email+"@gmail.com";
+		return nguoiDungIDAO.quenMatKhau(ma, gmail);
+	}
+	
+//	@GetMapping(value="/quenMatKhau/{ma}/{email}",produces = "application/json;charset=UTF-8")
+//	public boolean quenMatKhau(@PathVariable("ma") long ma ,@PathVariable("email") String email) {
+//		return nguoiDungIDAO.quenMatKhau(ma, email);
+//	}
+//	
 }

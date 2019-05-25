@@ -54,13 +54,13 @@ public class ForgetPass extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                // Bỏ note 3 dòng dưới
-//                url = MethodChung.CreateURL() + "nguoidung/findById/" + editma.getText().toString()
-//                        + "/" + editemail.getText().toString();
-//                new HttpAsyncTask().execute(url);
+                String mail = editemail.getText().toString();
+                int to = mail.indexOf("@");
+                email = mail.substring(0, to);
 
-                // Note dòng dưới này
-                new HttpAsyncTask().execute();
+                url = MethodChung.CreateURL() + "nguoidung/findById/" + editma.getText().toString()
+                        + "/" + email;
+                new HttpAsyncTask().execute(url);
             }
         });
 
@@ -84,8 +84,6 @@ public class ForgetPass extends AppCompatActivity {
         protected void onPostExecute(String result) {
             String t = "true";
             if (result.equals(t)) {
-                Toast.makeText(getApplicationContext(), "Thực hiện thành công ~", Toast.LENGTH_SHORT).show();
-
                 // Hiện progress bar
                 progressDialog = new ProgressDialog(ForgetPass.this);
                 progressDialog.setMessage("Đang chạy ..."); // Setting Message
@@ -103,10 +101,17 @@ public class ForgetPass extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Intent chuyenlayoutmain = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity((chuyenlayoutmain));
+                        Toast.makeText(getApplicationContext(), "Thực hiện thành công ~", Toast.LENGTH_SHORT).show();
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent chuyenlayoutmain = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity((chuyenlayoutmain));
+                            }
+                        }, 2000);
                     }
-                }, 2000);
+                }, 1000);
 
             } else {
                 Toast.makeText(getApplicationContext(), "Thực hiện thất bại ...", Toast.LENGTH_SHORT).show();

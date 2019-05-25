@@ -140,6 +140,12 @@ public class ThongTinSinhVien extends AppCompatActivity {
                 intentb3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intentb3);
                 break;
+            case R.id.thongTinTaiKhoan:
+                Intent intentb4 = new Intent(ThongTinSinhVien.this, ChinhSuaSV.class);
+                intentb4.putExtra("ma", manhanduoc);
+                intentb4.putExtra("status", "0");
+                startActivity(intentb4);
+                break;
             default:
                 fragmentClass = ThongTinSinhVien.class;
         }

@@ -1,13 +1,8 @@
 package com.thientri.api.controller;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.Normalizer;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.regex.Pattern;
@@ -43,7 +38,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.thientri.api.idao.GiaoVienIDAO;
 import com.thientri.api.model.ChiTietDiemDanh;
-import com.thientri.api.model.FileChiTietDiemDanh;
 import com.thientri.api.model.Lich;
 import com.thientri.api.model.MonHoc;
 import com.thientri.api.model.MonHocHienTai;
@@ -87,11 +81,11 @@ public class GiaoVienController {
 	@GetMapping(value = "/quetQRDiemDanh/{maSinhVien}/{maGiaoVien}/{matKhauGiaoVien}", produces = "application/json;charset=UTF-8")
 	public boolean quetQRDiemDanh(@PathVariable("maSinhVien") long maSinhVien,@PathVariable("maGiaoVien") long maGiaoVien, @PathVariable("matKhauGiaoVien") String matKhauGiaoVien) {
 		int status = giaoVienIDAO.getStatusChiTietDiemDanh(maSinhVien, maGiaoVien);
-		//quet lan dau
+		//Check in
 		if(status == 0) {
-			System.out.println(status);
 			return giaoVienIDAO.quetQRDiemDanhLan1(maSinhVien, maGiaoVien, matKhauGiaoVien);
 		}
+		//Check out
 		else if (status ==2) {
 			return giaoVienIDAO.quetQRDiemDanhLan2(maSinhVien, maGiaoVien, matKhauGiaoVien);
 		}
@@ -125,7 +119,6 @@ public class GiaoVienController {
 	@GetMapping(value = "/fileChiTietDiemDanh/{maGiaoVien}/{maMonHoc}", produces = "application/json;charset=UTF-8")
 	public boolean fileChiTietDiemDanh(@PathVariable("maGiaoVien") long maGiaoVien,
 			@PathVariable("maMonHoc") long maMonHoc) {
-		boolean n = false;
 		String tenMonHoc = giaoVienIDAO.tenMonHoc(maMonHoc);
 		List<String> listNgayHoc = giaoVienIDAO.getNgayHoc(maGiaoVien, maMonHoc);
 		HSSFWorkbook workbook = new HSSFWorkbook();
@@ -188,18 +181,15 @@ public class GiaoVienController {
             for (int i = 0; i < listNgayHoc.size(); i++) {
             	int cell_N = 4+i;
             	cell = row.createCell(cell_N, CellType.STRING);	
-            	//Ngay nhận 20-05-2019
             	String ngay =listNgayHoc.get(i).substring(0, 2);
         		String thang =listNgayHoc.get(i).substring(3, 5);
         		String nam = listNgayHoc.get(i).substring(6,10);
         		String ngayHoc = nam+"-"+thang+"-"+ngay;
-        		//2019-05-20
-//        		System.out.println(ngayHoc);
             	String checkDiemDanh = giaoVienIDAO.CheckDiemDanh(maMonHoc, ngayHoc,c.getMaSinhVien());
     			if(checkDiemDanh == null) {
-    				cell.setCellValue("Không");
+    				cell.setCellValue("0");
     			}else {
-    				cell.setCellValue("Có");
+    				cell.setCellValue("1");
     			}
     		}
             
@@ -265,7 +255,7 @@ public class GiaoVienController {
  
             // 7) send message
             Transport.send(message);
-            System.out.println("Message sent successfully");
+            System.out.println("The sent file was sent successfully");
             
             return true;
         } catch (MessagingException ex) {

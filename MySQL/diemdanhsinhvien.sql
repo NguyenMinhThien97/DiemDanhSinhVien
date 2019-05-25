@@ -2,10 +2,10 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 03, 2019 at 06:14 AM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.4
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th5 25, 2019 lúc 05:28 AM
+-- Phiên bản máy phục vụ: 10.1.39-MariaDB
+-- Phiên bản PHP: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `diemdanhsinhvien`
+-- Cơ sở dữ liệu: `diemdanhsinhvien`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cahoc`
+-- Cấu trúc bảng cho bảng `cahoc`
 --
 
 CREATE TABLE `cahoc` (
@@ -39,41 +39,63 @@ CREATE TABLE `cahoc` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
 
 --
--- Dumping data for table `cahoc`
+-- Đang đổ dữ liệu cho bảng `cahoc`
 --
 
 INSERT INTO `cahoc` (`macahoc`, `maphonghoc`, `buoihoc`, `giobatdau`, `gioketthuc`, `mamonhoc`, `thu`) VALUES
-(1, 1, 'Sáng', '10:00', '12:30', 1, 2),
+(1, 1, 'Sáng', '11:12', '20:00', 1, 2),
 (2, 2, 'Chiều', '12:00', '14:45', 2, 7),
 (3, 3, 'Chiều', '15:00', '5:30', 3, 7);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chitietdiemdanh`
+-- Cấu trúc bảng cho bảng `chitietdiemdanh`
 --
 
 CREATE TABLE `chitietdiemdanh` (
   `machitietdiemdanh` bigint(20) NOT NULL,
   `madiemdanh` int(11) NOT NULL,
   `lydonghi` varchar(255) COLLATE utf8mb4_german2_ci DEFAULT NULL,
-  `status` bit(1) NOT NULL,
+  `status` int(1) NOT NULL,
   `ngaydiemdanh` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
 
 --
--- Dumping data for table `chitietdiemdanh`
+-- Đang đổ dữ liệu cho bảng `chitietdiemdanh`
 --
 
 INSERT INTO `chitietdiemdanh` (`machitietdiemdanh`, `madiemdanh`, `lydonghi`, `status`, `ngaydiemdanh`) VALUES
-(1, 1, NULL, b'1', '2019-04-18 00:00:00'),
-(2, 2, NULL, b'1', '2019-04-28 00:00:00'),
-(3, 1, NULL, b'1', '2019-04-28 00:00:00');
+(16, 2, NULL, 1, '2019-05-15 00:00:00'),
+(17, 2, NULL, 1, '2019-01-14 00:00:00'),
+(18, 2, NULL, 1, '2019-03-23 00:00:00'),
+(19, 2, NULL, 1, '2019-04-21 00:00:00'),
+(20, 2, NULL, 1, '2019-05-04 00:00:00'),
+(30, 1, NULL, 1, '2019-05-15 00:00:00'),
+(31, 1, NULL, 1, '2019-01-14 00:00:00'),
+(32, 1, NULL, 1, '2019-03-23 00:00:00'),
+(33, 1, NULL, 1, '2019-04-21 00:00:00'),
+(34, 1, NULL, 1, '2019-05-04 00:00:00'),
+(36, 3, NULL, 1, '2019-05-15 00:00:00'),
+(37, 3, NULL, 1, '2019-01-14 00:00:00'),
+(38, 3, NULL, 1, '2019-03-23 00:00:00'),
+(39, 3, NULL, 1, '2019-04-21 00:00:00'),
+(40, 3, NULL, 1, '2019-05-04 00:00:00'),
+(41, 3, NULL, 0, '2019-05-20 00:00:00'),
+(42, 0, NULL, 1, '2019-05-15 00:00:00'),
+(43, 0, NULL, 1, '2019-01-14 00:00:00'),
+(44, 0, NULL, 1, '2019-03-23 00:00:00'),
+(45, 0, NULL, 1, '2019-04-21 00:00:00'),
+(46, 0, NULL, 1, '2019-05-04 00:00:00'),
+(47, 0, NULL, 0, '2019-05-20 00:00:00'),
+(50, 1, NULL, 2, '2019-05-20 00:00:00'),
+(51, 1, NULL, 0, '0000-00-00 00:00:00'),
+(52, 1, NULL, 1, '2019-05-20 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `diemdanh`
+-- Cấu trúc bảng cho bảng `diemdanh`
 --
 
 CREATE TABLE `diemdanh` (
@@ -86,17 +108,19 @@ CREATE TABLE `diemdanh` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
 
 --
--- Dumping data for table `diemdanh`
+-- Đang đổ dữ liệu cho bảng `diemdanh`
 --
 
 INSERT INTO `diemdanh` (`madiemdanh`, `magiaovien`, `masinhvien`, `mamonhoc`, `sotietdihoc`, `sotietvang`) VALUES
+(0, 10052121, 15012345, 1, 20, 0),
 (1, 10052121, 15094631, 1, 20, 0),
-(2, 10052121, 15022571, 2, 20, 0);
+(2, 10052121, 15022571, 1, 20, 0),
+(3, 10052121, 15056789, 1, 20, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `monhoc`
+-- Cấu trúc bảng cho bảng `monhoc`
 --
 
 CREATE TABLE `monhoc` (
@@ -114,18 +138,18 @@ CREATE TABLE `monhoc` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
 
 --
--- Dumping data for table `monhoc`
+-- Đang đổ dữ liệu cho bảng `monhoc`
 --
 
 INSERT INTO `monhoc` (`mamonhoc`, `chiso`, `hocky`, `magiaovien`, `namhoc`, `ngaybatdau`, `ngayketthuc`, `sotietlythuyet`, `sotietthuchanh`, `tenmonhoc`, `tongsotiet`) VALUES
-(1, 3, '1', 10052121, '2019', '2019-04-01', '2019-04-30', 30, 30, 'Khoá luận tốt nghiệp', 60),
-(2, 4, '1', 10052121, '2019', '2019-04-01', '2019-04-30', 30, 30, 'Kiến trúc máy tính', 60),
-(3, 4, '1', 10052121, '2019', '2019-04-01', '2019-05-30', 45, 0, 'Tâm lý học đại cương', 45);
+(1, 3, '1', 10052121, '2019', '2019-04-01', '2019-08-30', 30, 30, 'Khoá luận tốt nghiệp', 60),
+(2, 4, '1', 10052121, '2019', '2019-04-01', '2019-08-30', 30, 30, 'Kiến trúc máy tính', 60),
+(3, 4, '1', 10052121, '2019', '2019-04-01', '2019-08-30', 45, 0, 'Tâm lý học đại cương', 45);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nguoidung`
+-- Cấu trúc bảng cho bảng `nguoidung`
 --
 
 CREATE TABLE `nguoidung` (
@@ -145,18 +169,20 @@ CREATE TABLE `nguoidung` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
 
 --
--- Dumping data for table `nguoidung`
+-- Đang đổ dữ liệu cho bảng `nguoidung`
 --
 
 INSERT INTO `nguoidung` (`ma`, `chucvu`, `gioitinh`, `hinh`, `matkhau`, `ngaysinh`, `sodienthoai`, `email`, `status`, `ten`, `tenkhoa`, `tenlop`, `trinhdo`) VALUES
-(10052121, 'Giảng Viên', 'Nữ', NULL, '1', '1985-01-10 00:00:00', '', '', 1, 'Nguyễn Hoàng Oanh', 'CNTT', '', 'Tiến sĩ'),
+(10052121, 'Giảng Viên', 'Nữ', NULL, '1', '1985-01-10 00:00:00', '', 'minhtri456minh2@gmail.com', 1, 'Trần Thị Minh Khoa', 'CNTT', '', 'Tiến sĩ'),
+(15012345, 'Sinh viên', 'Nam', NULL, '5', '1997-01-05 00:00:00', '0348868611', '', 0, 'Bùi Nguyễn Minh Trung', 'CNTT', 'DHCNTT11A', 'Đại học'),
 (15022571, 'Sinh viên', 'Nam', NULL, '3', '1997-07-09 00:00:00', '0972983600', 'minhtri456minh@gmail.com', 0, 'Phạm Nguyễn Minh Trí', 'CNTT', 'DHCNTT11A', 'Đại học'),
+(15056789, 'Sinh viên', 'Nữ', NULL, '4', '1997-01-05 00:00:00', '0123456789', '', 0, 'Nguyễn Thị Thanh Thảo', 'CNTT', 'DHCNTT11A', 'Đại học'),
 (15094631, 'Sinh viên', 'Nam', NULL, '2', '1997-01-05 00:00:00', '0348868611', '', 0, 'Nguyễn Minh Thiên', 'CNTT', 'DHCNTT11A', 'Đại học');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `phonghoc`
+-- Cấu trúc bảng cho bảng `phonghoc`
 --
 
 CREATE TABLE `phonghoc` (
@@ -166,63 +192,63 @@ CREATE TABLE `phonghoc` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
 
 --
--- Dumping data for table `phonghoc`
+-- Đang đổ dữ liệu cho bảng `phonghoc`
 --
 
 INSERT INTO `phonghoc` (`maphonghoc`, `sochongoi`, `tenphonghoc`) VALUES
-(1, 50, 'A1.01'),
+(1, 50, 'H2.01'),
 (2, 45, 'H6.03'),
 (3, 50, 'V12.05');
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `cahoc`
+-- Chỉ mục cho bảng `cahoc`
 --
 ALTER TABLE `cahoc`
   ADD PRIMARY KEY (`macahoc`);
 
 --
--- Indexes for table `chitietdiemdanh`
+-- Chỉ mục cho bảng `chitietdiemdanh`
 --
 ALTER TABLE `chitietdiemdanh`
   ADD PRIMARY KEY (`machitietdiemdanh`);
 
 --
--- Indexes for table `diemdanh`
+-- Chỉ mục cho bảng `diemdanh`
 --
 ALTER TABLE `diemdanh`
   ADD PRIMARY KEY (`madiemdanh`);
 
 --
--- Indexes for table `monhoc`
+-- Chỉ mục cho bảng `monhoc`
 --
 ALTER TABLE `monhoc`
   ADD PRIMARY KEY (`mamonhoc`);
 
 --
--- Indexes for table `nguoidung`
+-- Chỉ mục cho bảng `nguoidung`
 --
 ALTER TABLE `nguoidung`
   ADD PRIMARY KEY (`ma`);
 
 --
--- Indexes for table `phonghoc`
+-- Chỉ mục cho bảng `phonghoc`
 --
 ALTER TABLE `phonghoc`
   ADD PRIMARY KEY (`maphonghoc`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `chitietdiemdanh`
+-- AUTO_INCREMENT cho bảng `chitietdiemdanh`
 --
 ALTER TABLE `chitietdiemdanh`
-  MODIFY `machitietdiemdanh` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `machitietdiemdanh` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

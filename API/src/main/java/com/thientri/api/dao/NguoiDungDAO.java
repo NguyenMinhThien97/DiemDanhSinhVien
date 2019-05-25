@@ -4,10 +4,29 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DateFormat;
+import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
+import java.util.UUID;
+import java.util.regex.Pattern;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import org.springframework.stereotype.Repository;
 
@@ -81,24 +100,17 @@ public class NguoiDungDAO implements NguoiDungIDAO {
 		return n>0;
 	}
 
-	public boolean updateNguoiDung(NguoiDung nguoiDung) {
+	public boolean updateNguoiDung(long ma, String matKhau, String soDienThoai, String email) {
 		PreparedStatement smt = null;
 		int n = 0;
 		try {
 			Connection con = app.getConnection();
-			String sql = "update nguoidung set ten=?,hinh=?,ngaysinh=?,gioitinh=?,tenlop=?,trinhdo=?,chucvu=?,tenkhoa=?, matkhau=?, status=? where ma=?";
+			String sql = "UPDATE nguoidung n SET n.sodienthoai = ? , n.email = ? WHERE n.ma = ?, n.matkhau = ?";
 			smt = con.prepareStatement(sql);
-			smt.setString(1, nguoiDung.getTenNguoiDung());
-			smt.setString(2, nguoiDung.getHinh());
-			smt.setString(3,nguoiDung.getNgaySinh());
-			smt.setString(4, nguoiDung.getGioiTinh());
-			smt.setString(5, nguoiDung.getTenLop());
-			smt.setString(6, nguoiDung.getTrinhDo());
-			smt.setString(7, nguoiDung.getChucVu());
-			smt.setString(8, nguoiDung.getTenKhoa());
-			smt.setString(9, nguoiDung.getMatKhau());
-			smt.setInt(10, nguoiDung.getStatus());
-			smt.setLong(11, nguoiDung.getMaNguoiDung());
+			smt.setString(1,soDienThoai );
+			smt.setString(2, email);
+			smt.setLong(3, ma);
+			smt.setString(4, matKhau);
 			n = smt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -205,6 +217,59 @@ public class NguoiDungDAO implements NguoiDungIDAO {
 			e.printStackTrace();
 		}
 		return n>0;
+	}
+	
+	public boolean doiMatKhauRandom(long ma, String email, String matKhauMoi) {
+		PreparedStatement smt = null;
+		int n = 0;
+		try {
+			Connection con = app.getConnection();
+			String sql = "update nguoidung n set n.matkhau=? where n.ma=? and n.email = ?";
+			smt = con.prepareStatement(sql);
+			smt.setString(1, matKhauMoi);
+			smt.setLong(2, ma);
+			smt.setString(3,email);
+			n = smt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return n>0;
+	}
+	
+	public boolean quenMatKhau(long ma, String email) {
+		String matKhauMoi = UUID.randomUUID().toString().substring(0, 6);
+		boolean n = doiMatKhauRandom(ma, email, matKhauMoi);
+		// Get properties object
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.socketFactory.port", 465);
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.port", 465);
+ 
+        // get Session
+        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("diemdanhsinhvienapp@gmail.com", "01627085898");
+            }
+        });
+     // compose message
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email.trim()));
+            message.setSubject("Quen mat khau dang nhap cho tai khoan.");
+            message.setText("Chao ban,\nGan day ban da quen mat khau cua minh, ban vui long nhap mat khau: \n\n\t\t" + matKhauMoi + "\n\nde dang nhap lai tai khoan.");
+             
+            // send message
+            Transport.send(message);
+             
+            System.out.println("Message change password sent successfully");
+        } catch (MessagingException e) {
+        	e.printStackTrace();
+        	return false;
+        }
+		
+		return n;
 	}
 
 }

@@ -48,7 +48,7 @@ public class ThongTinGiaoVien extends AppCompatActivity {
         setContentView(R.layout.activity_thong_tin_giao_vien);
         getSupportActionBar().hide();
 
-        // Nhận mã SV từ phần đăng nhập
+        // Nhận mã GV từ phần đăng nhập
         Intent nhanpass = getIntent();
         manhanduoc = nhanpass.getStringExtra("ma");
         passnhanduoc = nhanpass.getStringExtra("pass");
@@ -120,6 +120,12 @@ public class ThongTinGiaoVien extends AppCompatActivity {
                 intentb3.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intentb3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intentb3);
+                break;
+            case R.id.thongTinTaiKhoan:
+                Intent intentb4 = new Intent(ThongTinGiaoVien.this, ChinhSuaSV.class);
+                intentb4.putExtra("ma", manhanduoc);
+                intentb4.putExtra("status", "1");
+                startActivity(intentb4);
                 break;
             default:
                 fragmentClass = ThongTinGiaoVien.class;

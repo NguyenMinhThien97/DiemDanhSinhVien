@@ -158,7 +158,7 @@ public class ChiTietDiemDanhSV extends AppCompatActivity {
 
                     if (stat.equals("1"))
                         stat = "V";
-                    else if (stat.equals("0"))
+                    else
                         stat = "X";
 
                     TableRow tr = new TableRow(getApplicationContext());

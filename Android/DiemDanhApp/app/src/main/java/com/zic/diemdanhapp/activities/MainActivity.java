@@ -42,11 +42,17 @@ public class MainActivity extends AppCompatActivity {
 
         final TextView txtname = findViewById(R.id.txtName);
         final EditText txtpass = findViewById(R.id.txtPass);
+        final CheckBox cbnhotaikhoan = findViewById(R.id.checkBoxForget);
         SP = getSharedPreferences(filename, 0);
         String getname = SP.getString("key1", "");
         String getpass = SP.getString("key2", "");
         txtname.setText(getname);
         txtpass.setText(getpass);
+        if (getname.equals(null) || getname.equals(""))
+            cbnhotaikhoan.setChecked(false);
+        else
+            cbnhotaikhoan.setChecked(true);
+
 
         // Sự kiện bấm nút Login
         Button btnlogin = findViewById(R.id.btnLogin);

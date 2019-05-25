@@ -37,8 +37,6 @@
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="6fbfff" />
                                       <entry key="foregroundImage" value="D:\Z-BT\Android\roll_call_icon.png" />
-                                      <entry key="legacyIconShape" value="CIRCLE" />
-                                      <entry key="webIconShape" value="CIRCLE" />
                                     </map>
                                   </option>
                                 </PersistentState>

@@ -13,4 +13,7 @@ public interface SinhVienIDAO {
 	public MonHocHienTai monHocHienTai(long maSinhVien, String matKhau);
 	public List<MonHoc> getTenMonHoc(long maSinhVien);
 	public List<DiemDanhSinhVien> xemChiTietDiemDanh(long maSinhVien, long maMonHoc);
+	public int getStatusChiTietDiemDanh(long maSinhVien);
+	public boolean quetQRDiemDanhLan1(String tenPhongHoc, long maSinhVien, String matKhau) ;
+	public boolean quetQRDiemDanhLan2(String tenPhongHoc, long maSinhVien, String matKhau);
 }

@@ -2,8 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/bangDiemDanh"
-        android:title="Chi tiết điểm danh"
-        android:icon="@drawable/bangdiemdanh"/>
+        android:icon="@drawable/bangdiemdanh"
+        android:title="Chi tiết điểm danh" />
+    <item
+        android:id="@+id/thongTinTaiKhoan"
+        android:icon="@drawable/bangdiemdanh"
+        android:title="Thông tin tài khoản" />
     <item
         android:id="@+id/xemLichDay"
         android:icon="@drawable/xemlich"

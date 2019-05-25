@@ -35,7 +35,8 @@
                 android:layout_width="270dp"
                 android:layout_height="32dp"
                 android:layout_margin="10dp"
-                android:background="#010028"/>
+                android:background="#010028"
+                />
 
             <Button
                 android:id="@+id/btnGoTenMonHoc"

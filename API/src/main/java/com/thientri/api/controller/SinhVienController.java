@@ -30,7 +30,16 @@ public class SinhVienController {
 	
 	@GetMapping(value = "/quetQRDiemDanh/{tenPhongHoc}/{maSinhVien}/{matKhau}",  produces = "application/json;charset=UTF-8")
 	public boolean quetQRDiemDanh(@PathVariable("tenPhongHoc") String tenPhongHoc,@PathVariable("maSinhVien") long maSinhVien,@PathVariable("matKhau") String matKhau) {
-		return sinhVienIDAO.quetQRDiemDanh(tenPhongHoc, maSinhVien, matKhau);
+		int status = sinhVienIDAO.getStatusChiTietDiemDanh(maSinhVien);
+		//Check in
+		if(status == 0) {
+			return sinhVienIDAO.quetQRDiemDanhLan1(tenPhongHoc, maSinhVien, matKhau);
+		}
+		//Check out
+		else if (status == 2) {
+			return sinhVienIDAO.quetQRDiemDanhLan2(tenPhongHoc, maSinhVien, matKhau);
+		}
+		return false;
 	}
 	
 	@GetMapping(value = "/monHocHienTai/{maSinhVien}/{matKhau}",  produces = "application/json;charset=UTF-8")
