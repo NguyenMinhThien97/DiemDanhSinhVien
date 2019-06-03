@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 25, 2019 lúc 05:28 AM
+-- Thời gian đã tạo: Th6 03, 2019 lúc 06:28 PM
 -- Phiên bản máy phục vụ: 10.1.39-MariaDB
 -- Phiên bản PHP: 7.3.5
 
@@ -43,9 +43,10 @@ CREATE TABLE `cahoc` (
 --
 
 INSERT INTO `cahoc` (`macahoc`, `maphonghoc`, `buoihoc`, `giobatdau`, `gioketthuc`, `mamonhoc`, `thu`) VALUES
-(1, 1, 'Sáng', '11:12', '20:00', 1, 2),
-(2, 2, 'Chiều', '12:00', '14:45', 2, 7),
-(3, 3, 'Chiều', '15:00', '5:30', 3, 7);
+(1, 1, 'Sáng', '23:30', '23:59', 1, 3),
+(2, 2, 'Sáng', '10:55', '10:30', 2, 4),
+(3, 2, 'Sáng', '08:00', '10:30', 3, 4),
+(4, 2, 'Sáng', '08:00', '10:30', 4, 4);
 
 -- --------------------------------------------------------
 
@@ -81,16 +82,27 @@ INSERT INTO `chitietdiemdanh` (`machitietdiemdanh`, `madiemdanh`, `lydonghi`, `s
 (38, 3, NULL, 1, '2019-03-23 00:00:00'),
 (39, 3, NULL, 1, '2019-04-21 00:00:00'),
 (40, 3, NULL, 1, '2019-05-04 00:00:00'),
-(41, 3, NULL, 0, '2019-05-20 00:00:00'),
+(41, 3, NULL, 1, '2019-05-20 00:00:00'),
 (42, 0, NULL, 1, '2019-05-15 00:00:00'),
 (43, 0, NULL, 1, '2019-01-14 00:00:00'),
 (44, 0, NULL, 1, '2019-03-23 00:00:00'),
 (45, 0, NULL, 1, '2019-04-21 00:00:00'),
 (46, 0, NULL, 1, '2019-05-04 00:00:00'),
-(47, 0, NULL, 0, '2019-05-20 00:00:00'),
-(50, 1, NULL, 2, '2019-05-20 00:00:00'),
-(51, 1, NULL, 0, '0000-00-00 00:00:00'),
-(52, 1, NULL, 1, '2019-05-20 00:00:00');
+(47, 0, NULL, 1, '2019-05-20 00:00:00'),
+(50, 2, NULL, 1, '2019-05-20 00:00:00'),
+(52, 1, NULL, 1, '2019-05-20 00:00:00'),
+(53, 1, NULL, 1, '2019-05-25 00:00:00'),
+(54, 2, NULL, 1, '2019-05-25 00:00:00'),
+(55, 3, NULL, 1, '2019-05-25 00:00:00'),
+(56, 0, NULL, 1, '2019-05-25 00:00:00'),
+(61, 1, NULL, 0, '2019-05-29 00:00:00'),
+(62, 2, NULL, 0, '2019-05-29 00:00:00'),
+(63, 3, NULL, 0, '2019-05-29 00:00:00'),
+(64, 0, NULL, 0, '2019-05-29 00:00:00'),
+(73, 12, NULL, 2, '2019-05-29 00:00:00'),
+(74, 13, NULL, 0, '2019-05-29 00:00:00'),
+(75, 14, NULL, 0, '2019-05-29 00:00:00'),
+(76, 15, NULL, 0, '2019-05-29 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -112,10 +124,14 @@ CREATE TABLE `diemdanh` (
 --
 
 INSERT INTO `diemdanh` (`madiemdanh`, `magiaovien`, `masinhvien`, `mamonhoc`, `sotietdihoc`, `sotietvang`) VALUES
-(0, 10052121, 15012345, 1, 20, 0),
+(0, 10052121, 15029061, 1, 20, 0),
 (1, 10052121, 15094631, 1, 20, 0),
 (2, 10052121, 15022571, 1, 20, 0),
-(3, 10052121, 15056789, 1, 20, 0);
+(3, 10052121, 15019651, 1, 20, 0),
+(12, 10052121, 15029061, 2, 20, 0),
+(13, 10052121, 15019651, 2, 20, 0),
+(14, 10052121, 15022571, 2, 20, 0),
+(15, 10052121, 15094631, 2, 20, 0);
 
 -- --------------------------------------------------------
 
@@ -142,9 +158,8 @@ CREATE TABLE `monhoc` (
 --
 
 INSERT INTO `monhoc` (`mamonhoc`, `chiso`, `hocky`, `magiaovien`, `namhoc`, `ngaybatdau`, `ngayketthuc`, `sotietlythuyet`, `sotietthuchanh`, `tenmonhoc`, `tongsotiet`) VALUES
-(1, 3, '1', 10052121, '2019', '2019-04-01', '2019-08-30', 30, 30, 'Khoá luận tốt nghiệp', 60),
-(2, 4, '1', 10052121, '2019', '2019-04-01', '2019-08-30', 30, 30, 'Kiến trúc máy tính', 60),
-(3, 4, '1', 10052121, '2019', '2019-04-01', '2019-08-30', 45, 0, 'Tâm lý học đại cương', 45);
+(1, 5, '2', 10052121, '2019', '2019-04-01', '2019-08-30', 30, 30, 'Khoá luận tốt nghiệp', 60),
+(2, 5, '2', 10052121, '2019', '2019-04-01', '2019-06-30', 30, 30, 'Bảo vệ khóa luận', 60);
 
 -- --------------------------------------------------------
 
@@ -173,11 +188,13 @@ CREATE TABLE `nguoidung` (
 --
 
 INSERT INTO `nguoidung` (`ma`, `chucvu`, `gioitinh`, `hinh`, `matkhau`, `ngaysinh`, `sodienthoai`, `email`, `status`, `ten`, `tenkhoa`, `tenlop`, `trinhdo`) VALUES
-(10052121, 'Giảng Viên', 'Nữ', NULL, '1', '1985-01-10 00:00:00', '', 'minhtri456minh2@gmail.com', 1, 'Trần Thị Minh Khoa', 'CNTT', '', 'Tiến sĩ'),
-(15012345, 'Sinh viên', 'Nam', NULL, '5', '1997-01-05 00:00:00', '0348868611', '', 0, 'Bùi Nguyễn Minh Trung', 'CNTT', 'DHCNTT11A', 'Đại học'),
-(15022571, 'Sinh viên', 'Nam', NULL, '3', '1997-07-09 00:00:00', '0972983600', 'minhtri456minh@gmail.com', 0, 'Phạm Nguyễn Minh Trí', 'CNTT', 'DHCNTT11A', 'Đại học'),
-(15056789, 'Sinh viên', 'Nữ', NULL, '4', '1997-01-05 00:00:00', '0123456789', '', 0, 'Nguyễn Thị Thanh Thảo', 'CNTT', 'DHCNTT11A', 'Đại học'),
-(15094631, 'Sinh viên', 'Nam', NULL, '2', '1997-01-05 00:00:00', '0348868611', '', 0, 'Nguyễn Minh Thiên', 'CNTT', 'DHCNTT11A', 'Đại học');
+(1009900, 'Giáo viên', 'Nữ', NULL, '1', '1989-06-05 00:00:00', '0348868611', '', 1, 'Giáo Vien Phản Biện 2', 'CNTT', '', 'Tiến sĩ'),
+(10052121, 'Giảng Viên', 'Nữ', NULL, '1', '1985-01-10 00:00:00', '', 'minhtri456minh2@gmail.com', 1, 'Giáo Viên Phản Biện', 'CNTT', '', 'Tiến sĩ'),
+(10069292, 'Giáo viên', 'Nam', NULL, '1', '1989-01-05 00:00:00', '0348868611', '', 1, 'Giáo Vien Phản Biện 1', 'CNTT', '', 'Tiến sĩ'),
+(15019651, 'Sinh viên', 'Nữ', NULL, '1', '1997-01-05 00:00:00', '0123456789', '', 0, 'Nguyễn Thị Thanh Thảo', 'CNTT', 'DHCNTT11A', 'Đại học'),
+(15022571, 'Sinh viên', 'Nam', NULL, '3', '1997-07-09 00:00:00', '0972983600', 'minhtri456minh2@gmail.com', 0, 'Phạm Nguyễn Minh Trí', 'CNTT', 'DHCNTT11A', 'Đại học'),
+(15029061, 'Sinh viên', 'Nam', NULL, '1', '1997-01-05 00:00:00', '0348868611', '', 0, 'Bùi Nguyễn Minh Trung', 'CNTT', 'DHCNTT11A', 'Đại học'),
+(15094631, 'Sinh viên', 'Nam', NULL, '1', '1997-01-05 00:00:00', '0348868611', 'minhthiennguyen1997@gmail.com', 0, 'Nguyễn Minh Thiên', 'CNTT', 'DHCNTT11A', 'Đại học');
 
 -- --------------------------------------------------------
 
@@ -197,8 +214,31 @@ CREATE TABLE `phonghoc` (
 
 INSERT INTO `phonghoc` (`maphonghoc`, `sochongoi`, `tenphonghoc`) VALUES
 (1, 50, 'H2.01'),
-(2, 45, 'H6.03'),
-(3, 50, 'V12.05');
+(2, 45, 'B2.04'),
+(3, 50, 'B2.03');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `thongbao`
+--
+
+CREATE TABLE `thongbao` (
+  `mathongbao` bigint(20) NOT NULL,
+  `magiaovien` varchar(255) COLLATE utf8mb4_german2_ci NOT NULL,
+  `mamonhoc` varchar(255) COLLATE utf8mb4_german2_ci DEFAULT NULL,
+  `tenthongbao` varchar(255) COLLATE utf8mb4_german2_ci NOT NULL,
+  `noidung` text COLLATE utf8mb4_german2_ci NOT NULL,
+  `ngaytao` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `thongbao`
+--
+
+INSERT INTO `thongbao` (`mathongbao`, `magiaovien`, `mamonhoc`, `tenthongbao`, `noidung`, `ngaytao`) VALUES
+(25, '10052121', '1', 'Đi bảo vệ khóa luận', 'Thời gian báo cáo: 8h30 29/05/2019\r\nPhòng  B2.04', '2019-05-28 00:00:00'),
+(26, '10052121', '1', 'Khoá luận tốt nghiệp', 'Các em chuẩn bị cuốn báo cáo và, in 2 bản slide', '2019-05-29 00:00:00');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -241,6 +281,12 @@ ALTER TABLE `phonghoc`
   ADD PRIMARY KEY (`maphonghoc`);
 
 --
+-- Chỉ mục cho bảng `thongbao`
+--
+ALTER TABLE `thongbao`
+  ADD PRIMARY KEY (`mathongbao`);
+
+--
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
@@ -248,7 +294,13 @@ ALTER TABLE `phonghoc`
 -- AUTO_INCREMENT cho bảng `chitietdiemdanh`
 --
 ALTER TABLE `chitietdiemdanh`
-  MODIFY `machitietdiemdanh` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `machitietdiemdanh` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+
+--
+-- AUTO_INCREMENT cho bảng `thongbao`
+--
+ALTER TABLE `thongbao`
+  MODIFY `mathongbao` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

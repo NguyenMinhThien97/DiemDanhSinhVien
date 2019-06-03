@@ -14,6 +14,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".activities.ChiTietThongBaoGiaoVien"
+            android:label="@string/title_activity_chi_tiet_thong_bao_giao_vien"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activities.ThemThongBaoGV"
+            android:label="ThemThongBaoGV"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.ThongBaoGiaoVien"
+            android:label="@string/title_activity_thong_bao_giao_vien"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.ChiTietThongBaoSinhVien"
+            android:label="@string/title_activity_chi_tiet_thong_bao_sinh_vien"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.ThongBaoSinhVien"
+            android:label="@string/title_activity_thong_bao_sinh_vien"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +49,7 @@
         <activity android:name=".activities.ChinhSuaSV" />
         <activity android:name=".activities.ChiTietDiemDanh" />
         <activity android:name=".activities.XemLichHoc" />
-        <activity android:name=".activities.ChiTietDiemDanhSV"></activity>
+        <activity android:name=".activities.ChiTietDiemDanhSV" />
     </application>
 
 </manifest>

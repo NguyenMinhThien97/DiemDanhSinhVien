@@ -126,7 +126,7 @@ public class ChiTietDiemDanh extends AppCompatActivity {
                     mamonhoc = ((String) mamonhoc).substring(0, ((String) mamonhoc).indexOf("."));
 
                     String[] output = spinnerngay.getSelectedItem().toString().split("-");
-                    String t = output[0]+output[1]+output[2];
+                    String t = output[0] + output[1] + output[2];
 
                     urldiemdanh = MethodChung.CreateURL() + "/giaovien/xemChiTietDiemDanh/"
                             + mamonhoc + "/" + t;
@@ -251,21 +251,26 @@ public class ChiTietDiemDanh extends AppCompatActivity {
 
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject obj = array.getJSONObject(i);
+
+                    int stt = tbl.getChildCount();
                     String ten = obj.getString("tenSinhVien");
                     String ma = obj.getString("maSinhVien");
                     String stat = obj.getString("status");
 
                     if (stat.equals("1")) {
                         stat = "V";
+                    } else if (stat.equals("2")) {
+                        stat = "";
                     } else
                         stat = "X";
 
                     TableRow tr = new TableRow(getApplicationContext());
+                    TextView txtStt = new TextView(getApplicationContext());
                     TextView txtTen = new TextView(getApplicationContext());
                     TextView txtMa = new TextView(getApplicationContext());
                     TextView txtStat = new TextView(getApplicationContext());
 
-                    CreateRow(tr, txtTen, ten, txtMa, ma, txtStat, stat);
+                    CreateRow(tr, txtStt, stt, txtTen, ten, txtMa, ma, txtStat, stat);
                 }
 
             } catch (JSONException e) {
@@ -275,13 +280,22 @@ public class ChiTietDiemDanh extends AppCompatActivity {
         }
 
         //Hàm tạo Row điểm danh
-        private void CreateRow(TableRow tr, TextView txtTen, String ten, TextView txtMa, String ma, TextView txtStat, String stat) {
+        private void CreateRow(TableRow tr, TextView txtStt, int stt, TextView txtTen, String ten, TextView txtMa, String ma, TextView txtStat, String stat) {
 
             TableLayout tbl = findViewById(R.id.tableLichHoc);
+            String s = Integer.toString(stt);
 
             tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
             tr.setBackgroundColor(Color.parseColor("#ffffff"));
             tr.setOrientation(TableRow.VERTICAL);
+
+            txtStt.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+            txtStt.setBackground(getDrawable(R.drawable.row_xem_lich_white));
+            txtStt.setPadding(10, 10, 10, 10);
+            txtStt.setText(s);
+            txtStt.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
+            txtStt.setTextColor(Color.parseColor("#040750"));
+            txtStt.setTextSize(10);
 
             txtTen.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
             txtTen.setBackground(getDrawable(R.drawable.row_xem_lich_white));
@@ -289,7 +303,7 @@ public class ChiTietDiemDanh extends AppCompatActivity {
             txtTen.setText(ten);
             txtTen.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
             txtTen.setTextColor(Color.parseColor("#040750"));
-            txtTen.setTextSize(12);
+            txtTen.setTextSize(10);
 
             txtMa.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
             txtMa.setBackground(getDrawable(R.drawable.row_xem_lich_white));
@@ -297,7 +311,7 @@ public class ChiTietDiemDanh extends AppCompatActivity {
             txtMa.setText(ma);
             txtMa.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
             txtMa.setTextColor(Color.parseColor("#040750"));
-            txtMa.setTextSize(12);
+            txtMa.setTextSize(10);
 
             txtStat.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
             txtStat.setBackground(getDrawable(R.drawable.row_xem_lich_white));
@@ -305,9 +319,9 @@ public class ChiTietDiemDanh extends AppCompatActivity {
             txtStat.setText(stat);
             txtStat.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
             txtStat.setTextColor(Color.parseColor("#040750"));
-            txtStat.setTextSize(12);
+            txtStat.setTextSize(10);
 
-
+            tr.addView(txtStt);
             tr.addView(txtTen);
             tr.addView(txtMa);
             tr.addView(txtStat);
@@ -341,9 +355,9 @@ public class ChiTietDiemDanh extends AppCompatActivity {
 
             String t = "true";
             if (result.equals(t)) {
-                Toast.makeText(getApplicationContext(), "Đã gửi file thành công ~", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Đã gửi file thành công.", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getApplicationContext(), "Gửi file không thành công ...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Gửi file không thành công.", Toast.LENGTH_SHORT).show();
             }
 
         }

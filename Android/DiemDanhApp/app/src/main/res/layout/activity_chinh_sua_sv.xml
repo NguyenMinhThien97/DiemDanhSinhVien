@@ -56,42 +56,40 @@
 
         <TextView
             android:id="@+id/txtViewTenNavi"
-            android:layout_width="400px"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
             android:textColor="#fff"
             android:textSize="20dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/txtViewLopNavi"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageViewNavi"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/txtViewLopNavi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:text="                   "
             android:textColor="#fff"
             android:textSize="15dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/txtViewMaNavi"
+            app:layout_constraintStart_toEndOf="@+id/imageViewNavi"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewTenNavi"
+            app:layout_constraintVertical_bias="1.0"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/txtViewMaNavi"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="4dp"
             android:text="                       "
             android:textColor="#fff"
             android:textSize="15dp"
@@ -111,38 +109,28 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <Button
-            android:id="@+id/btnSua"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/custom_button"
-            android:text="Sửa thông tin"
-            android:textColor="#fff"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
             android:id="@+id/btnChangePass"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/custom_button"
             android:text="Đổi mật khẩu"
             android:textColor="#fff"
             android:textSize="15dp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tableLayout"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TableLayout
+            android:id="@+id/tableLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/row_xem_lich_aqua"
             android:padding="20px"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -250,29 +238,6 @@
             </TableRow>
 
             //Row Khoa/Lớp
-
-            <TableRow
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/labelKhoaLop"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.2"
-                    android:text="Lớp : "
-                    android:textSize="17dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/txtKhoaLop"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.8"
-                    android:text="               "
-                    android:textSize="17dp" />
-            </TableRow>
 
             //Row Trình độ
 

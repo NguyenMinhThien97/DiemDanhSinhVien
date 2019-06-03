@@ -41,15 +41,15 @@ public class ChinhSuaSV extends AppCompatActivity {
         new HttpAsyncTask().execute(MethodChung.CreateURL() + "nguoidung/findById/" + manhanduoc);
 
 
-        // Sự kiện bấm nút Sửa
-        Button btnsua = findViewById(R.id.btnSua);
-        btnsua.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-            }
-        });
+//        // Sự kiện bấm nút Sửa
+//        Button btnsua = findViewById(R.id.btnSua);
+//        btnsua.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//            }
+//        });
 
         // Sự kiện bấm nút Đổi mật khẩu
         Button btndoi = findViewById(R.id.btnChangePass);
@@ -97,8 +97,6 @@ public class ChinhSuaSV extends AppCompatActivity {
             TextView txtsdt = findViewById(R.id.txtSDT);
             TextView txtemail = findViewById(R.id.txtEmail);
 
-            // Tên lớp chỉ có sv có, gv không có
-            TextView txtkhoalop = findViewById(R.id.txtKhoaLop);
 
             TextView txttrinhdo = findViewById(R.id.txtTrinhDo);
             TextView txtchucvu = findViewById(R.id.txtChucVu);
@@ -119,19 +117,13 @@ public class ChinhSuaSV extends AppCompatActivity {
                 tenkhoa = jsonObj.getString("tenKhoa");
 
                 tenNavi.setText(ten);
-
-                if (status.equals("0"))
-                    lopNavi.setText(tenlop);
-                else if (status.equals("1"))
-                    lopNavi.setText(tenkhoa);
-
-                maNavi.setText(ma);
+                lopNavi.setText(ma);
+                maNavi.setText(tenlop);
 
                 txtngaysinh.setText(ngaysinh);
                 txtgioitinh.setText(gioitinh);
                 txtsdt.setText(sdt);
                 txtemail.setText(email);
-                txtkhoalop.setText(tenlop);
                 txttrinhdo.setText(trinhdo);
                 txtchucvu.setText(chucvu);
                 txttenkhoa.setText(tenkhoa);

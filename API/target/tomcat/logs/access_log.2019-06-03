@@ -1,0 +1,7 @@
+192.168.43.1 - - [03/Jun/2019:01:46:35 +0700] "GET /nguoidung/dangNhap/10052121/1 HTTP/1.1" 200 - http-bio-8899-exec-1 4450
+192.168.43.1 - - [03/Jun/2019:01:48:09 +0700] "GET /nguoidung/dangNhap/10052121/1 HTTP/1.1" 200 290 http-bio-8899-exec-1 475
+192.168.43.1 - - [03/Jun/2019:01:48:10 +0700] "GET /nguoidung/findById/10052121 HTTP/1.1" 200 290 http-bio-8899-exec-3 39
+192.168.43.1 - - [03/Jun/2019:01:48:10 +0700] "GET /giaovien/monHocHienTai/10052121/1 HTTP/1.1" 200 - http-bio-8899-exec-5 37
+192.168.43.1 - - [03/Jun/2019:01:50:27 +0700] "GET /giaovien/getTenMonHoc/10052121 HTTP/1.1" 200 126 http-bio-8899-exec-7 41
+192.168.43.1 - - [03/Jun/2019:01:50:29 +0700] "GET /giaovien/getNgayHoc/10052121/1 HTTP/1.1" 200 116 http-bio-8899-exec-9 47
+192.168.43.1 - - [03/Jun/2019:01:50:32 +0700] "GET //giaovien/xemChiTietDiemDanh/1/29052019 HTTP/1.1" 200 696 http-bio-8899-exec-1 55

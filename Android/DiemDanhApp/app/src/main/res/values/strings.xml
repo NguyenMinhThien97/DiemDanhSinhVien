@@ -24,4 +24,9 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_thong_bao_sinh_vien">ThongBaoSinhVien</string>
+    <string name="title_activity_chi_tiet_thong_bao_sinh_vien">ChiTietThongBaoSinhVien</string>
+    <string name="title_activity_thong_bao_giao_vien">ThongBaoGiaoVien</string>
+    <string name="title_activity_them_thong_bao_gv">ThemThongBaoGV</string>
+    <string name="title_activity_chi_tiet_thong_bao_giao_vien">ChiTietThongBaoGiaoVien</string>
 </resources>

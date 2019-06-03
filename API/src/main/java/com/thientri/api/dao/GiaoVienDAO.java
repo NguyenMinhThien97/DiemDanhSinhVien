@@ -69,7 +69,7 @@ public class GiaoVienDAO implements GiaoVienIDAO{
 		PreparedStatement smt = null;
 		try {
 			Connection con = app.getConnection();
-			String sql = "SELECT n.ma, n.ten, n.tenlop, n.hinh, n.gioitinh, c.status , c.lydonghi FROM nguoidung n, diemdanh d, chitietdiemdanh c WHERE c.madiemdanh = d.madiemdanh AND d.masinhvien =n.ma AND d.mamonhoc = ? AND c.ngaydiemdanh = ? AND n.status = 0";
+			String sql = "SELECT DISTINCT n.ma, n.ten, n.tenlop, n.hinh, n.gioitinh, c.status , c.lydonghi FROM nguoidung n, diemdanh d, chitietdiemdanh c WHERE c.madiemdanh = d.madiemdanh AND d.masinhvien =n.ma AND d.mamonhoc = ? AND c.ngaydiemdanh = ? AND n.status = 0";
 			smt = con.prepareStatement(sql);
 			smt.setLong(1, maMonHoc);
 			smt.setString(2, ngayDiemDanh);

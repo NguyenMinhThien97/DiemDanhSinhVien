@@ -44,7 +44,6 @@ public class ChiTietDiemDanhSV extends AppCompatActivity {
         final TableLayout table = findViewById(R.id.tableLichHoc);
 
         btnin.setVisibility(View.INVISIBLE);
-        btntongngayhoc.setVisibility(View.INVISIBLE);
         table.setVisibility(View.INVISIBLE);
 
         final Button btntiep = findViewById(R.id.btnTiep);
@@ -57,7 +56,6 @@ public class ChiTietDiemDanhSV extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 btnin.setVisibility(View.INVISIBLE);
-                btntongngayhoc.setVisibility(View.INVISIBLE);
                 table.setVisibility(View.INVISIBLE);
             }
 
@@ -81,7 +79,6 @@ public class ChiTietDiemDanhSV extends AppCompatActivity {
                     new HttpAsyncTaskDiemDanh().execute(urldiemdanh);
 
                     btnin.setVisibility(View.VISIBLE);
-                    btntongngayhoc.setVisibility(View.VISIBLE);
                     table.setVisibility(View.VISIBLE);
                 }
             }
@@ -193,7 +190,7 @@ public class ChiTietDiemDanhSV extends AppCompatActivity {
             txtSTT.setText(s);
             txtSTT.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
             txtSTT.setTextColor(Color.parseColor("#040750"));
-            txtSTT.setTextSize(12);
+            txtSTT.setTextSize(10);
 
             txtNgay.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
             txtNgay.setBackground(getDrawable(R.drawable.row_xem_lich_white));
@@ -201,7 +198,7 @@ public class ChiTietDiemDanhSV extends AppCompatActivity {
             txtNgay.setText(ngay);
             txtNgay.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
             txtNgay.setTextColor(Color.parseColor("#040750"));
-            txtNgay.setTextSize(12);
+            txtNgay.setTextSize(10);
 
             txtStat.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
             txtStat.setBackground(getDrawable(R.drawable.row_xem_lich_white));
@@ -209,7 +206,7 @@ public class ChiTietDiemDanhSV extends AppCompatActivity {
             txtStat.setText(stat);
             txtStat.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
             txtStat.setTextColor(Color.parseColor("#040750"));
-            txtStat.setTextSize(12);
+            txtStat.setTextSize(10);
 
             tr.addView(txtSTT);
             tr.addView(txtNgay);

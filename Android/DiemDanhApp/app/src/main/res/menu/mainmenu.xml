@@ -5,13 +5,13 @@
         android:icon="@drawable/bangdiemdanh"
         android:title="Chi tiết điểm danh" />
     <item
-        android:id="@+id/thongTinTaiKhoan"
-        android:icon="@drawable/bangdiemdanh"
-        android:title="Thông tin tài khoản" />
-    <item
         android:id="@+id/xemLichDay"
         android:icon="@drawable/xemlich"
-        android:title="Xem lịch dạy/học" />
+        android:title="Xem lịch " />
+    <item
+        android:id="@+id/thongTinTaiKhoan"
+        android:icon="@drawable/info_user"
+        android:title="Tài khoản" />
     <item
         android:id="@+id/doiMatKhau"
         android:icon="@drawable/xemlich"

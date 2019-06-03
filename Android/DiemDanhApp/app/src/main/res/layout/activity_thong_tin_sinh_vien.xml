@@ -18,8 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#018fe5"
-            android:orientation="vertical"></Toolbar>
-
+            android:orientation="vertical">
         <ImageView
             android:id="@+id/btnmenu"
             android:layout_width="50dp"
@@ -27,6 +26,15 @@
             android:paddingLeft="6dp"
             android:paddingTop="5dp"
             app:srcCompat="@drawable/iconsmenu" />
+        <ImageView
+            android:id="@+id/btnThongBao"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="260dp"
+            android:layout_marginRight="6dp"
+            android:padding="6dp"
+            app:srcCompat="@drawable/icons_notification" />
+        </Toolbar>
 
     </FrameLayout>
 
@@ -36,6 +44,7 @@
         android:paddingTop="70dp">
 
         <TableLayout
+            android:layout_margin="10dp"
             android:id="@+id/tablayoutMonTiepTheo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,7 +53,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollViewThongTinGV">
+            app:layout_constraintTop_toBottomOf="@+id/menu">
 
             <TableRow
                 android:layout_width="0dp"
@@ -75,7 +84,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".35"
-                    android:text="Mã môn họ̣c"
+                    android:text="Mã môn học"
                     android:textColor="#040750"
                     android:textSize="20dp"
                     android:textStyle="bold" />

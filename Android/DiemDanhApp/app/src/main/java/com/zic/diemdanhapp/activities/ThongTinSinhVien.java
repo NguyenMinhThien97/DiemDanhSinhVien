@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.zic.diemdanhapp.R;
 import com.zic.diemdanhapp.adapters.MethodChung;
+import com.zic.diemdanhapp.model.ThongBao;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -63,10 +64,19 @@ public class ThongTinSinhVien extends AppCompatActivity {
         final NavigationView navigationView = findViewById(R.id.navigationview);
         toggle.syncState();
         ImageView toolbar = findViewById(R.id.btnmenu);
+        ImageView btnThongBao = findViewById(R.id.btnThongBao);
         toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(navigationView);
+            }
+        });
+        btnThongBao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentThongTin = new Intent(ThongTinSinhVien.this, ThongBaoSinhVien.class);
+                intentThongTin.putExtra("ma", manhanduoc);
+                startActivity(intentThongTin);
             }
         });
 
@@ -200,8 +210,8 @@ public class ThongTinSinhVien extends AppCompatActivity {
                 pass = jsonObj.getString("matKhau");
 
                 tenNavi.setText(ten);
-                lopNavi.setText(tenlop);
-                maNavi.setText(ma);
+                lopNavi.setText(ma);
+                maNavi.setText(tenlop);
 
             } catch (JSONException e) {
                 e.printStackTrace();

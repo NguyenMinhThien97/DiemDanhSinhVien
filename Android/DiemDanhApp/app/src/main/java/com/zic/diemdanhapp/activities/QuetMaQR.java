@@ -1,6 +1,7 @@
 package com.zic.diemdanhapp.activities;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -83,9 +84,9 @@ public class QuetMaQR extends AppCompatActivity implements ZXingScannerView.Resu
         protected void onPostExecute(String result) {
             String t = "true";
             if (result.equals(t)) {
-                Toast.makeText(getApplicationContext(), "Đã điểm danh ~", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Đã điểm danh.", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getApplicationContext(), "Mã không đúng ... \n Thử lại nào!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Điểm danh không thành công\n Hãy thử lại !", Toast.LENGTH_LONG).show();
             }
 
         }

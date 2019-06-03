@@ -33,7 +33,7 @@ public class ThongTinGiaoVien extends AppCompatActivity {
 
     private String manhanduoc, passnhanduoc;
 
-    private String ma, ten, hinh, ngaysinh, gioitinh, trinhdo, chucvu, tenkhoa, pass;
+    private String ma, ten, hinh, ngaysinh, gioitinh, trinhdo, chucvu, tenkhoa, pass, tenlop;
 
     private String mamon, tenmon, ngaybd, ngaykt, tenphong, giobd, giokt;
 
@@ -47,8 +47,9 @@ public class ThongTinGiaoVien extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thong_tin_giao_vien);
         getSupportActionBar().hide();
+        ImageView btnThongBao = findViewById(R.id.btnThongBao);
 
-        // Nhận mã GV từ phần đăng nhập
+        // Nhận mã SV từ phần đăng nhập
         Intent nhanpass = getIntent();
         manhanduoc = nhanpass.getStringExtra("ma");
         passnhanduoc = nhanpass.getStringExtra("pass");
@@ -72,6 +73,15 @@ public class ThongTinGiaoVien extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(navigationView);
+            }
+        });
+
+        btnThongBao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentThongTin = new Intent(ThongTinGiaoVien.this, ThongBaoGiaoVien.class);
+                intentThongTin.putExtra("ma", manhanduoc);
+                startActivity(intentThongTin);
             }
         });
 
@@ -172,14 +182,15 @@ public class ThongTinGiaoVien extends AppCompatActivity {
                 ngaysinh = jsonObj.getString("ngaySinh");
                 gioitinh = jsonObj.getString("gioiTinh");
                 trinhdo = jsonObj.getString("trinhDo");
+                tenlop = jsonObj.getString("tenLop");
                 chucvu = jsonObj.getString("chucVu");
                 tenkhoa = jsonObj.getString("tenKhoa");
                 pass = jsonObj.getString("matKhau");
 
-
                 tenNavi.setText(ten);
-                lopNavi.setText(tenkhoa);
+                lopNavi.setText(tenlop);
                 maNavi.setText(ma);
+
 
             } catch (JSONException e) {
                 e.printStackTrace();

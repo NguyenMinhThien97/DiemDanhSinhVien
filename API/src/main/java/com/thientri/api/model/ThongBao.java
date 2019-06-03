@@ -2,31 +2,38 @@ package com.thientri.api.model;
 
 public class ThongBao {
 	private long maThongBao;
-	private long maGiaoVien;
+	private String tenGiaoVien;
+	private String tenMonHoc;
 	private String tenThongBao;
 	private String noiDung;
 	private String ngayTao;
-	
-	public ThongBao(long maThongBao, long maGiaoVien, String tenThongBao, String noiDung, String ngayTao) {
+	public ThongBao(long maThongBao, String tenGiaoVien, String tenMonHoc, String tenThongBao, String noiDung,
+			String ngayTao) {
 		super();
 		this.maThongBao = maThongBao;
-		this.maGiaoVien = maGiaoVien;
+		this.tenGiaoVien = tenGiaoVien;
+		this.tenMonHoc = tenMonHoc;
 		this.tenThongBao = tenThongBao;
 		this.noiDung = noiDung;
 		this.ngayTao = ngayTao;
 	}
-	
 	public long getMaThongBao() {
 		return maThongBao;
 	}
 	public void setMaThongBao(long maThongBao) {
 		this.maThongBao = maThongBao;
 	}
-	public long getMaGiaoVien() {
-		return maGiaoVien;
+	public String getTenGiaoVien() {
+		return tenGiaoVien;
 	}
-	public void setMaGiaoVien(long maGiaoVien) {
-		this.maGiaoVien = maGiaoVien;
+	public void setTenGiaoVien(String tenGiaoVien) {
+		this.tenGiaoVien = tenGiaoVien;
+	}
+	public String getTenMonHoc() {
+		return tenMonHoc;
+	}
+	public void setTenMonHoc(String tenMonHoc) {
+		this.tenMonHoc = tenMonHoc;
 	}
 	public String getTenThongBao() {
 		return tenThongBao;

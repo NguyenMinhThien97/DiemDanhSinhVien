@@ -58,7 +58,7 @@ public class ForgetPass extends AppCompatActivity {
                 int to = mail.indexOf("@");
                 email = mail.substring(0, to);
 
-                url = MethodChung.CreateURL() + "nguoidung/findById/" + editma.getText().toString()
+                url = MethodChung.CreateURL() + "nguoidung/quenMatKhau/" + editma.getText().toString()
                         + "/" + email;
                 new HttpAsyncTask().execute(url);
             }
@@ -87,7 +87,7 @@ public class ForgetPass extends AppCompatActivity {
                 // Hiện progress bar
                 progressDialog = new ProgressDialog(ForgetPass.this);
                 progressDialog.setMessage("Đang chạy ..."); // Setting Message
-                progressDialog.setTitle("Chuyển sang giao diện đăng nhập ~"); // Setting Title
+                progressDialog.setTitle("Chuyển sang giao diện đăng nhập."); // Setting Title
                 progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
                 progressDialog.show(); // Display Progress Dialog
                 progressDialog.setCancelable(false);
@@ -101,7 +101,7 @@ public class ForgetPass extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getApplicationContext(), "Thực hiện thành công ~", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Kiểm tra Email để nhận mật khẩu mới !", Toast.LENGTH_LONG).show();
                         Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             @Override
@@ -114,7 +114,7 @@ public class ForgetPass extends AppCompatActivity {
                 }, 1000);
 
             } else {
-                Toast.makeText(getApplicationContext(), "Thực hiện thất bại ...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Chúng tôi dang gặp lỗi.\nVui lòng thử lại sau!", Toast.LENGTH_LONG).show();
             }
         }
 

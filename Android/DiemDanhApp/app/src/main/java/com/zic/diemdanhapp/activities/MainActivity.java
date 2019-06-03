@@ -1,6 +1,5 @@
 package com.zic.diemdanhapp.activities;
 
-import android.app.Application;
 import android.app.ProgressDialog;
 import android.os.Handler;
 
@@ -53,18 +52,17 @@ public class MainActivity extends AppCompatActivity {
         else
             cbnhotaikhoan.setChecked(true);
 
-
         // Sự kiện bấm nút Login
-        Button btnlogin = findViewById(R.id.btnLogin);
+        Button btnlogin = findViewById(R.id.btnThemThongBao);
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isConnected() == true) {
                     // Kiểm tra đã nhập chưa
                     if (txtname.getText().toString().isEmpty())
-                        Toast.makeText(getApplicationContext(), "Bạn chưa nhập mã SV/GV ~", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Bạn chưa nhập tài khoản.", Toast.LENGTH_SHORT).show();
                     else if (txtpass.getText().toString().isEmpty())
-                        Toast.makeText(getApplicationContext(), "Bạn chưa nhập mật khẩu ~", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Bạn chưa nhập mật khẩu.", Toast.LENGTH_SHORT).show();
                     else {
 
                         String urldangnhap = "nguoidung/" + "dangNhap/" + txtname.getText().toString() + "/" + txtpass.getText().toString();
@@ -73,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                         new HttpAsyncTask().execute(MethodChung.CreateURL() + urldangnhap);
                     }
                 } else {
-                    Toast.makeText(MainActivity.this, "Không có kết nối mạng ...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Không có kết nối mạng.", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -122,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 // Hiện progress bar
                 progressDialog = new ProgressDialog(MainActivity.this);
                 progressDialog.setMessage("Đang chạy ..."); // Setting Message
-                progressDialog.setTitle("Đang kiểm tra ~"); // Setting Title
+                progressDialog.setTitle("Đang kiểm tra !"); // Setting Title
                 progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
                 progressDialog.show(); // Display Progress Dialog
                 progressDialog.setCancelable(false);
@@ -167,13 +165,13 @@ public class MainActivity extends AppCompatActivity {
                             chuyenlayoutSV.putExtra("pass", pass);
                             startActivity((chuyenlayoutSV));
                         } else
-                            Toast.makeText(MainActivity.this, "Lỗi ...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Lỗi vui lòng thử lại sau !", Toast.LENGTH_LONG).show();
 
                     }
                 }, 1000);
 
             } catch (JSONException e) {
-                Toast.makeText(MainActivity.this, "Sai thông tin tài khoản ...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Tài khoản hoặc mật khẩu sai !", Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
         }

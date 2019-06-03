@@ -51,11 +51,11 @@ public class ChangePass extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (editoldpass.getText().toString().isEmpty())
-                    Toast.makeText(getApplicationContext(), "Bạn phải nhập mật khẩu cũ ...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Chưa nhập mật khẩu cũ.", Toast.LENGTH_SHORT).show();
                 else if (editnewpass1.getText().toString().isEmpty())
-                    Toast.makeText(getApplicationContext(), "Bạn phải nhập khẩu mới ...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Chưa nhập khẩu mới.", Toast.LENGTH_SHORT).show();
                 else if (editnewpass2.getText().toString().isEmpty())
-                    Toast.makeText(getApplicationContext(), "Bạn để trống phần nhập lại mật khẩu mới ...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Chưa nhập lại mật khẩu mới.", Toast.LENGTH_SHORT).show();
                 else {
                     String urlcheck = "nguoidung/" + "findById/" + txtviewchangema.getText().toString();
 
@@ -64,7 +64,7 @@ public class ChangePass extends AppCompatActivity {
                     // Hiện progress bar
                     progressDialog = new ProgressDialog(ChangePass.this);
                     progressDialog.setMessage("Loading..."); // Setting Message
-                    progressDialog.setTitle("Đang kiểm tra ~"); // Setting Title
+                    progressDialog.setTitle("Đang kiểm tra !"); // Setting Title
                     progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
                     progressDialog.show(); // Display Progress Dialog
                     progressDialog.setCancelable(false);
@@ -82,10 +82,10 @@ public class ChangePass extends AppCompatActivity {
                             progressDialog.dismiss();
 
                             if (!editoldpass.getText().toString().equals(oldpass)) {
-                                Toast.makeText(getApplicationContext(), "Mật khẩu cũ sai ...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Mật khẩu sai.", Toast.LENGTH_SHORT).show();
                             } else if (editoldpass.getText().toString().equals(oldpass)
                                     && !editnewpass2.getText().toString().equals(editnewpass1.getText().toString())) {
-                                Toast.makeText(getApplicationContext(), "Nhập lại mật khẩu mới không đúng ...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Nhập lại mật khẩu mới không đúng.", Toast.LENGTH_SHORT).show();
                             } else {
                                 String urldoimatkhau = "nguoidung/" + "doiMatKhau/" + txtviewchangema.getText().toString()
                                         + "/" + editoldpass.getText().toString() + "/" + editnewpass2.getText().toString();
@@ -95,7 +95,7 @@ public class ChangePass extends AppCompatActivity {
                                 // Hiện progress bar
                                 progressDialog = new ProgressDialog(ChangePass.this);
                                 progressDialog.setMessage("Đang chạy ..."); // Setting Message
-                                progressDialog.setTitle("Đang thực hiện ~"); // Setting Title
+                                progressDialog.setTitle("Đang thực hiện !"); // Setting Title
                                 progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
                                 progressDialog.show(); // Display Progress Dialog
                                 progressDialog.setCancelable(false);
